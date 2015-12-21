@@ -112,6 +112,7 @@ define("app/itry/itry",[],function(require,exports){
 		    		var regExp = /'/g
 		    		var newArgs = arguments.replace(regExp,'');
 		    		var argArray = newArgs.split(',');
+		    		music.musicAndEmail(1);
 		    		hack.hack_btnStatus.apply(null,argArray);
 				}
 			});
