@@ -35,7 +35,7 @@ define("app/itry/hack",[],function(require,exports){
 
    	      	$.ajax({
 	        type : "get",
-	        url : detail_url
+	        url : detail_url,
 	        dataType: 'text',
 	        async : false,
 	        success : function(backPage){
