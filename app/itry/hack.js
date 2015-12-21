@@ -12,7 +12,7 @@ define("app/itry/hack",[],function(require,exports){
 		 }
  	}
 
- 	var listHandleProcess = {
+    var listHandleProcess = {
         count : 0,
         length : 0
     }
@@ -27,13 +27,16 @@ define("app/itry/hack",[],function(require,exports){
 
     var  getAppDetail = {
     }
+    getAppDetail.refresh = function(){
+    	exports.getApp(this.user_id,this.oid_md5,this.callback);
+    }
 
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
     	if(leave_num<=0){
         	$('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
       		$(".msg_played").css("display","block");
       		if(listHandleProcess.count == 1){
-                     exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
+                     setTimeout(getAppDetail.refresh,2000);
              	}else{
                      listHandleProcess.setCount(listHandleProcess.count - 1);
         	}
@@ -51,7 +54,7 @@ define("app/itry/hack",[],function(require,exports){
 	        		$('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
 	        		$(".msg_played").show();
 	        		if(listHandleProcess.count == 1){
-	                             exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
+	                              setTimeout(getAppDetail.refresh,2000);
 	                     	}else{
 	                             listHandleProcess.setCount(listHandleProcess.count - 1);
 	                	}
