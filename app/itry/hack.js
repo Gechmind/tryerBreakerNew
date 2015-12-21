@@ -28,7 +28,8 @@ define("app/itry/hack",[],function(require,exports){
     var  getAppDetail = {
     }
     getAppDetail.refresh = function(){
-    	exports.getApp(this.user_id,this.oid_md5,this.callback);
+    	that = this;
+    	exports.getApp(that.user_id,that.oid_md5,that.callback);
     }
 
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
