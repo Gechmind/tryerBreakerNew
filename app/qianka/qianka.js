@@ -38,7 +38,8 @@ define("app/qianka/qianka",[],function(require,exports){
 		backReqest();
 		
 		function backReqest(){
-			console.log("------totalRequestCount---------"+totalRequestCount+"@----"+new Date()+"----------")
+			totalRequestCount++;
+			console.log("------totalRequestCount---------"+ totalRequestCount +"@----"+new Date()+"----------")
 
 			xhr.open("GET","http://m.qianka.com/api/h5/subtask/fetch");
 			var ls = 0;
