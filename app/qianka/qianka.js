@@ -4,6 +4,8 @@ define("app/qianka/qianka",[],function(require,exports){
 	var music  = require("../../common/music");
 	var $ = require("jquery");
 	var paraMng = require("../../common/paraMng"); 
+	
+	var  totalRequestCount = 0;
 
 	var listObject = {
 		pname          : "钱咖",
@@ -36,6 +38,8 @@ define("app/qianka/qianka",[],function(require,exports){
 		backReqest();
 		
 		function backReqest(){
+			console.log("------totalRequestCount---------"+totalRequestCount+"@----"+new Date()+"----------")
+
 			xhr.open("GET","http://m.qianka.com/api/h5/subtask/fetch");
 			var ls = 0;
 			xhr.onreadystatechange = function(){
@@ -89,9 +93,9 @@ define("app/qianka/qianka",[],function(require,exports){
 							fetchids = [];
 						}
 
-					    if(gamingIds.length > 0){//直接执行
-					    	fetchids = gamingIds;
-					    }
+					    	if(gamingIds.length > 0){//直接执行
+					    		fetchids = gamingIds;
+					    	}
 						//刷新
 						if(ls == 0){
 							setTimeout(backReqest,5000)
