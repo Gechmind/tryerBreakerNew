@@ -33,8 +33,9 @@ define("app/itry/hack",[],function(require,exports){
 
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
     	if(leave_num<=0){
-        	$('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
-      		$(".msg_played").css("display","block");
+        	// $('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
+        	console.log("哎呀～暂时被抢光了!等等看吧")
+      		// $(".msg_played").css("display","block");
       		if(listHandleProcess.count == 1){
                      setTimeout(dRefresh,2000);
              	}else{
@@ -51,8 +52,9 @@ define("app/itry/hack",[],function(require,exports){
 	        async : false,
 	        success : function(num){
 	        	if(num=="-1"){
-	        		$('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
-	        		$(".msg_played").show();
+	        		console.log("哎呀～暂时被抢光了!等等看吧")
+	        		// $('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
+	        		// $(".msg_played").show();
 	        		if(listHandleProcess.count == 1){
 	                              setTimeout(dRefresh,2000);
 	                     	}else{
@@ -133,7 +135,7 @@ define("app/itry/hack",[],function(require,exports){
 		         	//模式切换
 		         	// paraMng.modelSwitch();
 		         	//提示音
-		         	callback(simpleTasks.length);
+		         	// callback(simpleTasks.length);
 		         	//回调页面跳转
 		         	backDis(simpleTasks);
 		         }else{
