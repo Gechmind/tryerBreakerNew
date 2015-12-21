@@ -1,0 +1,12 @@
+<h3 class="page-header">首席</h3>
+<div class="form-group">
+	停止轮巡：
+	<select  id="circle" class="form-control">
+		<option value="0" > 开启轮询(默认)</option>
+		<option value="1" > 关闭轮询</option>
+	</select> 
+</div>
+<div class="form-group">
+	最低轮询间隔(毫秒,首席需要大于5000): <input type="text" id="normalInterval" class="form-control"/>
+</div>
+<input type=hidden value="domob" id="setType">
