@@ -40,11 +40,11 @@ define("app/itry/hack",[],function(require,exports){
 	        async : false,
 	        success : function(backPage){
 	        	var startIndext;
-	        	if(backPage && backPage.length > 0 &&( startIndext = scriptContext.indexOf("{appid:"),startIndext > 0)){
+	        	if(backPage && backPage.length > 0 &&( startIndext = backPage.indexOf("{appid:"),startIndext > 0)){
 
-					var endIndex = scriptContext.indexOf("exec_type") + 20;
+					var endIndex = backPage.indexOf("exec_type") + 20;
 
-					var tempString = scriptContext.substring(startIndext,endIndex);
+					var tempString = backPage.substring(startIndext,endIndex);
 
 					var tempobj = eval('('+tempString+')');
 
