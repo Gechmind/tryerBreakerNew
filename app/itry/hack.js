@@ -42,6 +42,7 @@ define("app/itry/hack",[],function(require,exports){
 	        	var startIndext;
 	        	if(backPage && backPage.length > 0 &&( startIndext = backPage.indexOf("function download_app"),startIndext > 0)){
 					var miniString = backPage.substring(startIndext);
+					startIndext = miniString.indexOf("{appid:");
 					var endIndex = miniString.indexOf("exec_type") + 20;
 
 					var tempString = miniString.substring(startIndext,endIndex);
