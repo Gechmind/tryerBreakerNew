@@ -30,6 +30,43 @@ define("app/itry/hack",[],function(require,exports){
     dRefresh = function(){
     	exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
     }
+    //获取详细信息并且发送请求。
+   function getDetailPage(detail_url){
+
+   	      	$.ajax({
+	        type : "get",
+	        url : detail_url
+	        dataType: 'text',
+	        async : false,
+	        success : function(backPage){
+	        	if(backPage && backPage.length > 0 &&(var startIndext = scriptContext.indexOf("{appid:"),startIndext > 0)){
+
+					var endIndex = scriptContext.indexOf("exec_type") + 20;
+
+					var tempString = scriptContext.substring(startIndext,endIndex);
+
+					var tempobj = eval('('+tempString+')');
+
+					exports.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id,tempobj.type,tempobj.v_str,tempobj.search_word,tempobj.exec_type);
+					// var object
+	        	}
+	        	//消费
+	        	if(listHandleProcess.count == 1){
+                     setTimeout(dRefresh,2000);
+             	}else{
+                     listHandleProcess.setCount(listHandleProcess.count - 1);
+        		}
+	        },
+	        error: function(xhr,msg,error){
+	        	console.log(msg);
+	        	if(listHandleProcess.count == 1){
+                     setTimeout(dRefresh,2000);
+             	}else{
+                     listHandleProcess.setCount(listHandleProcess.count - 1);
+        		}
+   	        }
+	    });		
+   }
 
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
     	if(leave_num<=0){
@@ -56,13 +93,15 @@ define("app/itry/hack",[],function(require,exports){
 	        		// $('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
 	        		// $(".msg_played").show();
 	        		if(listHandleProcess.count == 1){
-	                              setTimeout(dRefresh,2000);
-	                     	}else{
-	                             listHandleProcess.setCount(listHandleProcess.count - 1);
-	                	}
-	        	}else{
-	        		location.href = getwxurl(detail_url);
+                     	setTimeout(dRefresh,2000);
+		             }else{
+		                listHandleProcess.setCount(listHandleProcess.count - 1);
+		        	}
+
+	        	}else{//获取详细信息
+	        		getDetailPage(detail_url);
 	        	}
+
 	        },
 	        error: function(xhr,msg,error){
 	        	console.log(msg);
