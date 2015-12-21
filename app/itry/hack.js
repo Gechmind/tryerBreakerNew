@@ -39,7 +39,8 @@ define("app/itry/hack",[],function(require,exports){
 	        dataType: 'text',
 	        async : false,
 	        success : function(backPage){
-	        	if(backPage && backPage.length > 0 &&(var startIndext = scriptContext.indexOf("{appid:"),startIndext > 0)){
+	        	var startIndext;
+	        	if(backPage && backPage.length > 0 &&( startIndext = scriptContext.indexOf("{appid:"),startIndext > 0)){
 
 					var endIndex = scriptContext.indexOf("exec_type") + 20;
 
