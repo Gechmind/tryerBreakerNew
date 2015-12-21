@@ -32,6 +32,11 @@ define("app/itry/hack",[],function(require,exports){
     	if(leave_num<=0){
         	$('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
       		$(".msg_played").css("display","block");
+      		if(listHandleProcess.count == 1){
+                     exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
+             	}else{
+                     listHandleProcess.setCount(listHandleProcess.count - 1);
+        	}
       		return;
     	}
 
@@ -46,10 +51,10 @@ define("app/itry/hack",[],function(require,exports){
 	        		$('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
 	        		$(".msg_played").show();
 	        		if(listHandleProcess.count == 1){
-                         exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
-                     }else{
-                         listHandleProcess.setCount(listHandleProcess.count - 1);
-                     }
+	                             exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
+	                     	}else{
+	                             listHandleProcess.setCount(listHandleProcess.count - 1);
+	                	}
 	        	}else{
 	        		location.href = getwxurl(detail_url);
 	        	}
