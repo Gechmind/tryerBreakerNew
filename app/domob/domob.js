@@ -202,6 +202,9 @@ define("app/domob/domob",[],function(require,exports){
 
                         //多任务需要处理，否则请求数以级数放大
                         $.each(list,function(index,value){
+                            console.log("--------------------任务名称:"+value.name+"-----------------任务价格："+value.price+"------");
+
+
                             if(!value.received && value.restNum != 0){
                             //获取任务明细
                                 getDetailCallback(value,claimTaskCallBack);
