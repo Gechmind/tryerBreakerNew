@@ -6,7 +6,8 @@ define("common/music",[],function(require,exports){
 		
 		});
  	}
-
+ 	exports.sendMusic = message;
+ 	
 	exports.musicAndEmail = function(ls){
 
 		var cirleInterval = +localStorage.hasTask;

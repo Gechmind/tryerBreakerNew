@@ -193,7 +193,11 @@ define("app/qianka/qianka",[],function(require,exports){
 		    		back = JSON.parse(back);
 		    		var backFlg =  back.data;
 		    		if(back.data && back.code == "200"){
-		    			music.musicAndEmail(1);
+		    			// music.musicAndEmail(1);
+		    			console.log("send music request");
+		    			
+		    			music.sendMusic();
+
 		    			setTimeout(callback,5000);
 		    			console.log("--------------success fetch task-------------------");
 		    		}else if(taskPool.hasNext()){
