@@ -150,7 +150,7 @@ define("app/domob/domob",[],function(require,exports){
 
                     if(back && 0 == back.status){
                         //提示
-                        music.musicAndEmail(1);
+                        music.sendMusic();
 
                         if(listHandleProcess.count == 1){
                              setTimeout(listInternal,2000);

@@ -2,6 +2,7 @@ define("app/itry/hack",[],function(require,exports){
 
 	var $ = require("jquery");
 	var paraMng = require("../../common/paraMng");
+	var music  = require("../../common/music");
 	var  totalRequestCount = 0;
 
 	function getwxurl(url){
@@ -28,9 +29,37 @@ define("app/itry/hack",[],function(require,exports){
     var  getAppDetail = {
     }
     dRefresh = function(){
-    	exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5,getAppDetail.callback);
+    	exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5);
     }
-    //获取详细信息并且发送请求。
+
+    //4、拷贝关键字
+	exports.h_download_app = function(appid,user_id,order_Id,type,v_str,search_word,exec_type){
+		$.ajax({
+	        type : "post",
+	        url : "/shike/user_click_record",
+	        data : {appid:appid,user_id:user_id,order_Id:order_Id,type:type,v_str:v_str,search_word:search_word,exec_type:exec_type},
+	        dataType: 'text',
+	        async : false,
+	        success : function(num){
+	        	if(num=="-1"){
+	        		$('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
+	        		$(".msg_played").show();
+	        	}else{
+	            	if(/micromessenger/i.test(navigator.userAgent)){
+	        			$(".safari_top").show();
+	        	        $(".Keyword_name").css({position: "absolute"});
+	        	        $(".Keyword_name").css('height','0px');
+	        	        $(".Keyword_name").css('width','0px');
+	        	        $(".Keyword_name").css('top','-100px');
+	        	        $(".Keyword_name").css('left','-100px');
+	        	        return;
+	            	}
+	            	// download_start();
+	        	}
+	        }
+	    });
+	}
+    //3、获取详细信息
    function getDetailPage(detail_url){
 
    	      	$.ajax({
@@ -69,7 +98,7 @@ define("app/itry/hack",[],function(require,exports){
    	        }
 	    });		
    }
-
+   // 2、抢任务
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
     	if(leave_num<=0){
         	// $('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
@@ -101,6 +130,7 @@ define("app/itry/hack",[],function(require,exports){
 		        	}
 
 	        	}else{//获取详细信息
+	        		music.sendMusic();
 	        		getDetailPage(detail_url);
 	        	}
 
@@ -113,38 +143,11 @@ define("app/itry/hack",[],function(require,exports){
     }
     
 
-     exports.h_download_app = function(appid,user_id,order_Id,type,v_str,search_word,exec_type){
-		$.ajax({
-	        type : "post",
-	        url : "/shike/user_click_record",
-	        data : {appid:appid,user_id:user_id,order_Id:order_Id,type:type,v_str:v_str,search_word:search_word,exec_type:exec_type},
-	        dataType: 'text',
-	        async : false,
-	        success : function(num){
-	        	if(num=="-1"){
-	        		$('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
-	        		$(".msg_played").show();
-	        	}else{
-	            	if(/micromessenger/i.test(navigator.userAgent)){
-	        			$(".safari_top").show();
-	        	        $(".Keyword_name").css({position: "absolute"});
-	        	        $(".Keyword_name").css('height','0px');
-	        	        $(".Keyword_name").css('width','0px');
-	        	        $(".Keyword_name").css('top','-100px');
-	        	        $(".Keyword_name").css('left','-100px');
-	        	        return;
-	            	}
-	            	// download_start();
-	        	}
-	        }
-	    });
-    }
-
-    exports.getApp =  function(user_id,oid_md5,callback){
+    // 1、获取列表
+    exports.getApp =  function(user_id,oid_md5){
 
     	getAppDetail.user_id = user_id;
     	getAppDetail.oid_md5 = oid_md5;
-    	getAppDetail.callback = callback;
 
     	var hackMethod = exports.hack_btnStatus;
     		

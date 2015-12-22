@@ -41,7 +41,7 @@ define("app/itry/itry",[],function(require,exports){
 		if(pattern.test("/shike/appList")){
 			//刷新模式
 			if(ajaxRefresh == "ajax"){//ajax 刷新
-				itryAssertAjax(fetchCallBackAjax);
+				itryAssertAjax();
 			}else{
 				itryAssert(listObject,fetchCallBack);
 			}
@@ -131,11 +131,11 @@ define("app/itry/itry",[],function(require,exports){
 	}
 
 	//ajax计数并跳转
-	function itryAssertAjax(callback){
+	function itryAssertAjax(){
 		//直接ajax分析applist,有任务直接跳转
-		hack.getApp(usr_id,oid_md5,callback);
+		hack.getApp(usr_id,oid_md5);
 	}
-	//ajax计数获取任务的callBack
+	//!!deprecate  ajax计数获取任务的callBack
 	function fetchCallBackAjax(ls){
 		//提示音
 		music.musicAndEmail(ls);
