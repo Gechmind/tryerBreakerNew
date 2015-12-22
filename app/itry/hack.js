@@ -190,7 +190,7 @@ define("app/itry/hack",[],function(require,exports){
 		 });
 
 			totalRequestCount++;
-        	console.log("-----------count----------"+totalRequestCount);
+        	console.log("-----------count----------"+totalRequestCount+"-------time@----------"+new Date());
     	}
 
          function backDis(simpleTasks){

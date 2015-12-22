@@ -185,7 +185,7 @@ define("app/domob/domob",[],function(require,exports){
     function getList(getDetailCallback,claimTaskCallBack) {
 
         totalRequestCount++;
-        console.log("-----------count----------"+totalRequestCount);
+        console.log("-----------count----------"+totalRequestCount+"------time@-----"+new Date());
 
                 $.ajax({
                 url: getTaskList.url,
