@@ -92,10 +92,12 @@ define("app/qianka/qianka",[],function(require,exports){
 
 						if(taskProcessing == true){//先清空
 							fetchids = [];
+							ls = 0;
 						}
 
 					    	if(gamingIds.length > 0){//直接执行
 					    		fetchids = gamingIds;
+					    		ls = 1;
 					    	}
 						//刷新
 						if(ls == 0){
