@@ -202,7 +202,7 @@ define("app/itry/hack",[],function(require,exports){
 	         	var order_id = simpleTask.order_id;
 	         	var appid = simpleTask.appid;
 	         	var detail_url = simpleTask.details_url;
-	         	var leave_num  = simpleTask.order_status_disp;
+	         	var leave_num  = 1;
 	         	hackMethod(user_id,order_id,appid,detail_url,leave_num);
          	})
          }
