@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+
+  "name": "breaker",
+  "description": "Auto get the undo task",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    // "default_popup": "popup.html",
+    "default_title": "Click here!"
+  },
+  "permissions": [
+    "cookies",
+    "clipboardRead",
+    "clipboardWrite",
+    "tabs",
+    "*://*/*"
+  ],
+  "background":{
+      // "scripts" : ["background.js"],
+      "page"    : "html/background.html"
+  },
+  "options_page":"html/options.html",
+  "content_scripts":[
+    {
+      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com//*"],
+      "js":[
+            "js/sea-modules/seajs/2.2.0/sea-debug.js",
+            "js/sea-modules/jquery/1.10.1/jquery-debug.js",
+            "js/common/music.js",
+            "js/common/paraMng.js",
+            "js/common/redirect.js",
+            "js/app/itry/hack.js",
+            "js/app/itry/itry.js",
+            "js/app/qianka/qianka.js",
+            "js/app/domob/domob.js",
+            "js/app/panda/panda.js",
+            "js/app/reloadNotions.js",
+            "js/content-script.js"
+          ]
+    }
+  ]
+}
