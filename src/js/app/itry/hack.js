@@ -64,7 +64,7 @@ define("app/itry/hack",[],function(require,exports){
 
    	      	$.ajax({
 	        type : "get",
-	        url : detail_url,
+	        url : detail_url+"?ds=r0",
 	        dataType: 'text',
 	        async : false,
 	        success : function(backPage){
@@ -82,7 +82,7 @@ define("app/itry/hack",[],function(require,exports){
 					// var object
 	        	}
 	        	//消费
-	        	if(listHandleProcess.count == 1){
+	        	if(listHandleProcess.count <= 1){
                      setTimeout(dRefresh,2000);
              	}else{
                      listHandleProcess.setCount(listHandleProcess.count - 1);
@@ -90,7 +90,7 @@ define("app/itry/hack",[],function(require,exports){
 	        },
 	        error: function(xhr,msg,error){
 	        	console.log(msg);
-	        	if(listHandleProcess.count == 1){
+	        	if(listHandleProcess.count <= 1){
                      setTimeout(dRefresh,2000);
              	}else{
                      listHandleProcess.setCount(listHandleProcess.count - 1);
@@ -102,9 +102,9 @@ define("app/itry/hack",[],function(require,exports){
    exports.hack_btnStatus = function(user_id,order_id,appid,detail_url,leave_num){
     	if(leave_num<=0){
         	// $('#played_msg').html('<p>哎呀～暂时被抢光了!等等看吧</p>');
-        	console.log("哎呀～暂时被抢光了!等等看吧")
+        	// console.log("哎呀～暂时被抢光了!等等看吧")
       		// $(".msg_played").css("display","block");
-      		if(listHandleProcess.count == 1){
+      		if(listHandleProcess.count <= 1){
                      setTimeout(dRefresh,2000);
              	}else{
                      listHandleProcess.setCount(listHandleProcess.count - 1);
@@ -115,12 +115,12 @@ define("app/itry/hack",[],function(require,exports){
 		$.ajax({
 	        type : "post",
 	        url : "/shike/user_click_record",
-	        data : {appid:appid,user_id:user_id,order_Id:order_id,type:"app",exec_type:'list'},
+	        data : {appid:appid,user_id:user_id,order_Id:order_id,type:"app",exec_type:'list',cache:false},
 	        dataType: 'text',
 	        async : false,
 	        success : function(num){
 	        	if(num=="-1"){
-	        		console.log("哎呀～暂时被抢光了!等等看吧")
+	        		// console.log("哎呀～暂时被抢光了!等等看吧")
 	        		// $('.prompt_play').html('<p>哎呀~已经被抢光了!等等看吧</p>');
 	        		// $(".msg_played").show();
 	        		if(listHandleProcess.count == 1){
@@ -130,6 +130,7 @@ define("app/itry/hack",[],function(require,exports){
 		        	}
 
 	        	}else{//获取详细信息
+	        		console.log("抢到任务");
 	        		music.sendMusic();
 	        		getDetailPage(detail_url);
 	        	}
@@ -137,7 +138,11 @@ define("app/itry/hack",[],function(require,exports){
 	        },
 	        error: function(xhr,msg,error){
 	        	console.log(msg);
-	        	window.location.reload(true);
+	        	if(listHandleProcess.count <= 1){
+                     setTimeout(dRefresh,2000);
+             	}else{
+                     listHandleProcess.setCount(listHandleProcess.count - 1);
+        		}
 	        }
 	    });		
     }
@@ -188,7 +193,11 @@ define("app/itry/hack",[],function(require,exports){
 
 		     },
 		     error:function(){
-		     	window.location.reload(true);
+		     	if(listHandleProcess.count <= 1){
+                     setTimeout(dRefresh,2000);
+             	}else{
+                     listHandleProcess.setCount(listHandleProcess.count - 1);
+        		}
 		     }
 		 });
 
@@ -201,13 +210,14 @@ define("app/itry/hack",[],function(require,exports){
          	listHandleProcess.setCount(simpleTasks.length);
          	
          	$.each(simpleTasks,function(index,simpleTask){
-	         	var user_id = user_id;
-	         	var order_id = simpleTask.order_id;
-	         	var appid = simpleTask.appid;
-	         	var detail_url = simpleTask.details_url;
-	         	var leave_num  = 1;
-	         	hackMethod(user_id,order_id,appid,detail_url,leave_num);
-         	})
+		 		console.log("任务名称："+simpleTask.search_word+"-------任务数："+simpleTask.order_status_disp)
+		     	var user_id = getAppDetail.user_id;
+		     	var order_id = simpleTask.order_id;
+		     	var appid = simpleTask.appid;
+		     	var detail_url = simpleTask.details_url;
+		     	var leave_num  = simpleTask.order_status_disp;
+		     	hackMethod(user_id,order_id,appid,detail_url,leave_num);
+		 	});
          }
 
          insideGet();
