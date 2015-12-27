@@ -39,6 +39,7 @@ document.getElementById('save').onclick = function(){
 		hostUrl = "http://itry.com/itry/appList";
 		hostDomain = "itry.com";
 		cookieContent  = document.getElementById("cookie").value;
+		mutiTask = document.getElementById("mutiTask").value;
 		if(cookieContent.length > 0){
 			setCookie(hostUrl,hostDomain,cookieContent);
 		}
@@ -46,6 +47,17 @@ document.getElementById('save').onclick = function(){
 		if(circle){
 			setItryCircle = true;
 		}
+
+		if(mutiTask == "1"){
+			chrome.tabs.query({url: "http://itry.com/*"}, function(tabs) {
+
+		 		chrome.tabs.sendMessage(tabs[0].id, {type:"setMutiTask",mutiTask:mutiTask}, function(response) { 
+		 				console.log(response);     
+		 			}); 
+
+			});
+		}
+		
 		var usrid = document.getElementById("usrid").value;
 		if(usrid){
 			chrome.runtime.sendMessage({type:"setItryId",usrid:usrid},function(response){

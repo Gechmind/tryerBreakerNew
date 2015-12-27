@@ -4,6 +4,12 @@ define("app/itry/hack",[],function(require,exports){
 	var paraMng = require("../../common/paraMng");
 	var music  = require("../../common/music");
 	var  totalRequestCount = 0;
+	var hasTask = false;
+	var multiTask = "0";//多任务
+
+	if(localStorage.multiTask == "1"){//开启多任务
+		multiTask = "1";
+	}
 
 	function getwxurl(url){
 		 if(/micromessenger/i.test(navigator.userAgent)){
@@ -166,9 +172,11 @@ define("app/itry/hack",[],function(require,exports){
 			 success:function (back) {
 
 		    	 console.log(back);
+		    	 hasTask = false;//初始化
 
 		    	 var simpleTasks = [];
 		         if(back != null && back.length >0 && "object" == typeof back){
+
 		         	
 		         	for(var i = 0;i<back.length;i++){
 		         		
@@ -176,8 +184,17 @@ define("app/itry/hack",[],function(require,exports){
 		         			//直接跳转到详情页面
 		         			simpleTasks.push(back[i]);
 
+		         		}else{
+		         			if(multiTask == "0"){
+		         				hasTask = true;
+		         				break;
+		         			}
 		         		}
 		         	}
+		         }
+		         
+		         if(hasTask){
+		         	simpleTasks = [];
 		         }
 
 		         if(simpleTasks.length > 0 ){

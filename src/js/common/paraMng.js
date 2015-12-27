@@ -37,6 +37,12 @@ define("common/paraMng",[],function(require,exports){
 
 				window.location.reload(true);
 			}
+		}else if(message.type == "setMutiTask"){
+			var multiTask = message.mutiTask;
+			if(multiTask == "0" || multiTask == "1"){
+				localStorage.multiTask = multiTask;
+			}
+
 		}
 	});
 
@@ -52,6 +58,7 @@ define("common/paraMng",[],function(require,exports){
 		});
 	}
 	
+
 
 	//模式切换
 	exports.modelSwitch = function(){
