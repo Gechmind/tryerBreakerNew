@@ -20,7 +20,7 @@
 <div>
 	是否多任务(慎重开启):
 	<select  id="mutiTask" class="form-control">
-		<option value="0" > 关闭轮询(默认)</option>
+		<option value="0" > 关闭多任务（默认)</option>
 		<option value="1" > 开启</option>
 	</select> 
 </div>
