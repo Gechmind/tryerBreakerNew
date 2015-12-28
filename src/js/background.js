@@ -2,7 +2,7 @@ $.ajax({
 	url:chrome.extension.getURL("/")+"template/auth",
 	type:"GET",
 	dataType:"json",
-	sucess:function(data){
+	success:function(data){
 		localStorage.authData = data;
 		var OD = data.od;
 		var GUID = data.guid;
