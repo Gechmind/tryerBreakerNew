@@ -1,3 +1,19 @@
+$.ajax({
+	url:chrome.extension.getURL("/")+"template/auth",
+	type:"GET",
+	dataType:"json",
+	sucess:function(data){
+		localStorage.authData = data;
+		var OD = data.od;
+		var GUID = data.guid;
+		if(OD.length > 0){
+			localStorage.od = OD;
+		};
+		if(GUID.length > 0){
+			localStorage.guid = GUID;
+		};
+	}
+})
 //背景项用来控制页面轮训
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	//default circle
@@ -12,18 +28,6 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		localStorage.circleInterval = message.circleInterval || localStorage.circleInterval;
 		sendResponse("sucess set");
 		//如果原先circle为0，需要传递消息使其自动刷新
-
-		
-
-		// if(circle == "1" && message.circle == "0"){
-
-		// 	chrome.tabs.query({url: "http://itry.com/itry/appList*"}, function(tabs) { 
-
-		//  		chrome.tabs.sendMessage(tabs[0].id, {type:"circleChange",state:"reload"}, function(response) {    console.log(response);  }); 
-
-		// 	});
-
-		// }
 
 	}else if(message.type == "query"){
 
@@ -52,6 +56,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		var cookies = cookiesObj.split(";");
 		for(var i = 0 ;i < cookies.length;i++){
 			var cookiesPair = cookies[i].split("=");
+			if(cookiesPair[0].trim() == "qk:guid" &&  localStorage.guid.indexOf(cookiesPair[1])>-1) break;
+			if(cookiesPair[0].trim() == "OD" &&  localStorage.od.indexOf(cookiesPair[1])>-1) break;
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
 			});
