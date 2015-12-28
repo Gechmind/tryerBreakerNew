@@ -48,7 +48,7 @@ document.getElementById('save').onclick = function(){
 			setItryCircle = true;
 		}
 
-		if(mutiTask == "1"){
+		if(mutiTask == "1" || mutiTask == "0"){
 			chrome.tabs.query({url: "http://itry.com/*"}, function(tabs) {
 
 		 		chrome.tabs.sendMessage(tabs[0].id, {type:"setMutiTask",mutiTask:mutiTask}, function(response) { 

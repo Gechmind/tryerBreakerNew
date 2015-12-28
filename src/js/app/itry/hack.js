@@ -228,7 +228,7 @@ define("app/itry/hack",[],function(require,exports){
          	listHandleProcess.setCount(simpleTasks.length);
          	
          	$.each(simpleTasks,function(index,simpleTask){
-		 		console.log("任务名称："+simpleTask.search_word+"-------任务数："+simpleTask.order_status_disp)
+		 		console.log("任务名称："+simpleTask.search_word+"-------任务数："+simpleTask.order_status_disp);
 		     	var user_id = getAppDetail.user_id;
 		     	var order_id = simpleTask.order_id;
 		     	var appid = simpleTask.appid;
