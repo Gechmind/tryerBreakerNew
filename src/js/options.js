@@ -78,9 +78,8 @@ document.getElementById('save').onclick = function(){
 		}
 		circleInterval = document.getElementById("normalInterval").value;
 	}else if(setType == "global"){
-		mailPush = document.getElementById("mailPush").value;
-		mailAd = document.getElementById("mailAd").value;
-		musicPush = mailAd = document.getElementById("musicPush").value;
+		var mailPush = document.getElementById("mailPush").value;
+		var mailAd = document.getElementById("mailAd").value;
 		if(circle){
 			 setItryCircle = false;
 			 setDomobCircle = false;
