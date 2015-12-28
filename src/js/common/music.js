@@ -1,4 +1,5 @@
 define("common/music",[],function(require,exports){
+'use strict';
 
 	function message(){
  		chrome.runtime.sendMessage({type:"triggerMusic",switcher:"on"},function(response){

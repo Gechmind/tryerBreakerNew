@@ -1,5 +1,5 @@
 define("common/paraMng",[],function(require,exports){
-
+'use strict';
 	//轮训初始化设置
 	!function () {
 
@@ -13,7 +13,7 @@ define("common/paraMng",[],function(require,exports){
 			localStorage.hasTask = 0;
 			localStorage.circle = 0;
 
-		};
+		}
 		
 		if(!localStorage.ajaxRefresh){
 			localStorage.ajaxRefresh = "refresh";
@@ -40,6 +40,8 @@ define("common/paraMng",[],function(require,exports){
 		}else if(message.type == "setMutiTask"){
 			var multiTask = message.mutiTask;
 			if(multiTask == "0" || multiTask == "1"){
+				var ins = multiTask == "0"?"关闭":"开启";
+				console.log("试客多任务开关"+"------------"+ins+"------------");
 				localStorage.multiTask = multiTask;
 			}
 

@@ -1,5 +1,5 @@
 define("app/itry/hack",[],function(require,exports){
-
+'use strict';
 	var $ = require("jquery");
 	var paraMng = require("../../common/paraMng");
 	var music  = require("../../common/music");
@@ -33,10 +33,11 @@ define("app/itry/hack",[],function(require,exports){
     }
 
     var  getAppDetail = {
-    }
-    dRefresh = function(){
+    };
+
+    var dRefresh = function(){
     	exports.getApp(getAppDetail.user_id,getAppDetail.oid_md5);
-    }
+    };
 
     //4、拷贝关键字
 	exports.h_download_app = function(appid,user_id,order_Id,type,v_str,search_word,exec_type){

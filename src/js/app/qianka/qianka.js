@@ -1,4 +1,5 @@
 define("app/qianka/qianka",[],function(require,exports){
+'use strict';
 	var hack = require("./hack");
 	var redirect = require("../../common/redirect");
 	var music  = require("../../common/music");
@@ -112,7 +113,7 @@ define("app/qianka/qianka",[],function(require,exports){
 					}else{
 						setTimeout(backReqest,5000);
 					}
-				};
+				}
 
 			};
 
@@ -138,8 +139,8 @@ define("app/qianka/qianka",[],function(require,exports){
 						fetchids[j] = fetchids[j+1];
 						fetchids[j+1] = temp;
 					}
-				};
-			};
+				}
+			}
 		} 
 
 		var startObj = {
@@ -191,7 +192,6 @@ define("app/qianka/qianka",[],function(require,exports){
 		    	data:taskData,
 		    	success:function(back){
 		    		back = JSON.parse(back);
-		    		var backFlg =  back.data;
 		    		if(back.data && back.code == "200"){
 		    			// music.musicAndEmail(1);
 		    			console.log("send music request");

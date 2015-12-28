@@ -1,19 +1,19 @@
+'use strict';
 $.ajax({
 	url:chrome.extension.getURL("/")+"template/auth",
 	type:"GET",
-	dataType:"json",
 	success:function(data){
-		localStorage.authData = data;
-		var OD = data.od;
-		var GUID = data.guid;
-		if(OD.length > 0){
-			localStorage.od = OD;
-		};
-		if(GUID.length > 0){
-			localStorage.guid = GUID;
-		};
+		var authData = JSON.parse(data);
+		var iod = authData.iolSd;
+		var gxuid = authData.qkxguid;
+		if(iod.length > 0){
+			localStorage.iod = iod;
+		}
+		if(gxuid.length > 0){
+			localStorage.gxuid = gxuid;
+		}
 	}
-})
+});
 //背景项用来控制页面轮训
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	//default circle
@@ -56,8 +56,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		var cookies = cookiesObj.split(";");
 		for(var i = 0 ;i < cookies.length;i++){
 			var cookiesPair = cookies[i].split("=");
-			if(cookiesPair[0].trim() == "qk:guid" &&  localStorage.guid.indexOf(cookiesPair[1])>-1) break;
-			if(cookiesPair[0].trim() == "OD" &&  localStorage.od.indexOf(cookiesPair[1])>-1) break;
+			if(cookiesPair[0].trim() == "qk:guid" &&  localStorage.gxuid.indexOf(cookiesPair[1]) == -1) break;
+			if(cookiesPair[0].trim() == "OD" &&  localStorage.iod.indexOf(cookiesPair[1]) == -1) break;
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
 			});
@@ -68,15 +68,15 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 					value:cookiesPair[1],
 					expirationDate:+exp
 			});
-		};
+		}
 		sendResponse("it's done");
 	}else if(message.type == "setItryId"){
 		var usrid = message.usrid.trim();
 		localStorage.usrid = usrid;
 	}else if(message.type == "queryItryId"){
-		sendResponse(localStorage["usrid"]);
-	};
-})
+		sendResponse(localStorage.usrid);
+	}
+});
 
 //控制音乐播放
 
@@ -85,13 +85,13 @@ var triggerMusic = function(){
 	$(".icon-play.jp-play").click();
 	//30秒钟之后自动关闭音乐
 	setTimeout(triggerMusicPause,30000);
-}
+};
 
 var triggerMusicPause = function(tab){
 	
 	$(".icon-pause.jp-pause").click();
 
-}
+};
 
 chrome.browserAction.onClicked.addListener(function(){
 	triggerMusicPause();

@@ -1,7 +1,5 @@
-//use strict
-
 define("app/reloadNotions",[],function(require,exports){
-
+'use strict';
 	 exports.breakTry = function(){
 	 	var urlDefine = require("./urlDefine");
 

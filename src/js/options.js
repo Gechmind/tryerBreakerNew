@@ -12,7 +12,7 @@ $("a").each(function(index,value){
 
 			})
 		})
-})
+});
 $("#global").click();
 
 function setCookie(hostUrl,hostDomain,cookieContent){
@@ -39,7 +39,7 @@ document.getElementById('save').onclick = function(){
 		hostUrl = "http://itry.com/itry/appList";
 		hostDomain = "itry.com";
 		cookieContent  = document.getElementById("cookie").value;
-		mutiTask = document.getElementById("mutiTask").value;
+		var mutiTask = document.getElementById("mutiTask").value;
 		if(cookieContent.length > 0){
 			setCookie(hostUrl,hostDomain,cookieContent);
 		}

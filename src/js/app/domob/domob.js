@@ -1,4 +1,5 @@
 define("app/domob/domob",[],function(require,exports){
+'use strict';
     // var hack = require("./hack");
     var redirect = require("../../common/redirect");
     var music  = require("../../common/music");
@@ -62,22 +63,6 @@ define("app/domob/domob",[],function(require,exports){
         }
     }
 
-    function checkReply(a) {
-        if (!a){
-            // return myAlert("哎呀，出错了", "返回值为空，请稍后再试"),!1;
-            getList();
-        }
-            
-        if ("string" == typeof a){
-            try {
-                a = JSON.parse(a)
-            } catch (b) {
-                // return myAlert("哎呀，出错了", "返回值为非法字符串，请稍后再试"),!1;
-                getList();
-            }
-        }
-            
-    }
 
     var listHandleProcess = {
         count : 0,
@@ -132,13 +117,12 @@ define("app/domob/domob",[],function(require,exports){
         var url = taskDeail.crp_url;
         if(url){
             url += url.indexOf("?") > 0 ? getCommonParams().substring(1) + "&ts=" + getCurTime() : getCommonParams() + "&ts=" + getCurTime(),
-            e = !0,
             $.ajax({
                 url: taskDeail.crp_url,
                 data: url,
                 type: "post",
                 success: function(back) {
-                    if (e = !1, "string" == typeof back)
+                    if ("string" == typeof back)
                         try {
                             
                             back = JSON.parse(back);
