@@ -90,6 +90,12 @@ document.getElementById('save').onclick = function(){
 		if(circle){
 			setDomobCircle = true;
 		}
+	}else if(setType == "atm"){
+		var postData = document.getElementById("cookie").value;
+		chrome.runtime.sendMessage({type:"setPostdata",postData:postData},function(response){
+			console.log(response);
+			alert(response);
+		})
 	}
 
 	

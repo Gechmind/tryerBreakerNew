@@ -1,16 +1,8 @@
 define("app/reloadNotions",[],function(require,exports){
 'use strict';
 	 exports.breakTry = function(){
-	 	var urlDefine = require("./urlDefine");
-
 		var paraMng = require("../common/paraMng");
 
-		var tryer = {
-			itry :  "itry.com",
-			domob : "r.ow.domob.cn",
-			quanming : "ow.miidi.net",
-			qianka : "m.qianka.com"
-		}
 
 		var domain = window.location.host;
 		var path = window.location.pathname;
@@ -28,6 +20,8 @@ define("app/reloadNotions",[],function(require,exports){
 			breaker = require("./qianka/qianka");
 		}else if(pattern.test("xb.shiwan123.com")){
 			breaker = require("./panda/panda");
+		}else if(pattern.test("api.91atm.com")){
+			breaker = require("./atm/atm");
 		}
 
 		breaker.start(path);

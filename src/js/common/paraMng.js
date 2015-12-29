@@ -53,6 +53,13 @@ define("common/paraMng",[],function(require,exports){
 		console.log("set cookie " + response);
 	});
 
+	exports.getPostData = function(){
+		chrome.runtime.sendMessage({type:"queryPostdata"},function(response){
+			console.log("-----queryPostdata-----" + response);
+			localStorage.postData = response;
+		});
+	}
+
 	exports.getUserId = function(){
 		chrome.runtime.sendMessage({type:"queryItryId"},function(response){
 			console.log("-----queryItryId-----" + response);

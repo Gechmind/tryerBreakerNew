@@ -75,6 +75,18 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		localStorage.usrid = usrid;
 	}else if(message.type == "queryItryId"){
 		sendResponse(localStorage.usrid);
+	}else if(message.type == "setPostdata"){
+		var postData = message.postData;
+		localStorage.postData = postData;
+		sendResponse("postData set done")
+	}else if(message.type == "queryPostdata"){
+		if(localStorage.postData){
+			sendResponse(localStorage.postData);
+			console.log("postData send");
+		}else{
+			sendResponse("");
+		}
+		console.log("postData send")
 	}
 });
 
