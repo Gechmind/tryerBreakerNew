@@ -17,6 +17,8 @@ define("app/atm/atm",[],function(require,exports){
 
      paraMng.getAtmAuth(token);
 
+     $(".alert-wrap").css({"display":"none"});
+
 // 	ad_id: "a706b769e0c26b04bae4d695ec1c90f7"
 // ad_url: "https://itunes.apple.com/app/id419805549"
 // description: "1.长按虚线，复制“周公解梦”|<br />2.在App Store中，粘贴并搜索|<br />3.找到“万年历”（约第2位）|<br />4.下载后试用微信登录并试用3分钟，领取奖励"
