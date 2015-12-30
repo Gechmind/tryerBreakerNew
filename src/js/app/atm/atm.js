@@ -116,7 +116,6 @@ define("app/atm/atm",[],function(require,exports){
                 data: formdata,
                 beforeSend:function(xhr){
                     xhr.setRequestHeader("Authorization", "Token " + token);
-                    xhr.setRequestHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"); 
                 },
                 contentType:false,
                 processData:false,
@@ -155,7 +154,6 @@ define("app/atm/atm",[],function(require,exports){
                 processData:false,
                 beforeSend:function(xhr){
                 	xhr.setRequestHeader("Authorization", "Token " + token);
-                    xhr.setRequestHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"); 
                 },
                 data: formdata,
                 success: function(data) {
