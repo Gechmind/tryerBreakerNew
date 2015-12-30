@@ -1,5 +1,5 @@
 'use strict';
-$("a").each(function(index,value){
+$("a").each(function(){
 		$(this).on("click",function(event){
 			event.preventDefault();
 			var url = this.href;
@@ -8,12 +8,51 @@ $("a").each(function(index,value){
 				type : "get",
 				success : function(data){
 					$("#content")[0].innerHTML = data;
+					if(url.indexOf("atm")>-1)
+					setAtmPostData();
 				}
 
 			})
 		})
 });
 $("#global").click();
+
+function setAtmPostData(){
+	var postData = document.getElementById("postData");
+	postData.addEventListener("change",function(event){
+		var t = event.target;
+		var data = t.value;
+		var f = data.indexOf("form-data");
+		if(f < 0){
+			alert("postData 获取错误");
+		}
+		var dataTemp = data.substr(t);
+		var nvpair = {};
+		var reviewString = "";
+		var dataArray = dataTemp.split("Content-Disposition: ");
+		for(var i=0;i<dataArray.length;i++){
+			parsePara(dataArray[i],nvpair);
+		}
+
+		function parsePara(str,nvpair){
+			var namstart = str.indexOf('name="');
+			var realstart = namstart+6;
+			var nameEnd  = str.indexOf('"',realstart);
+			var valueEnd = str.indexOf('------');
+			var name = str.substring(realstart,nameEnd);
+			var value = str.substring(nameEnd+1,valueEnd).trim();
+			nvpair[name] = value;
+			reviewString += name + ":" + value + "\n";
+			return;
+		}
+
+		var  paraString =  JSON.stringify(nvpair);
+		document.getElementById("cookie").value = paraString;
+		document.getElementById("review").innerText = reviewString;
+
+
+	},false);
+}
 
 function setCookie(hostUrl,hostDomain,cookieContent){
 	chrome.runtime.sendMessage({type:"setCookie",url:hostUrl,domain:hostDomain,cookieContent:cookieContent},function(response){

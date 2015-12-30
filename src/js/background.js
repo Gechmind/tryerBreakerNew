@@ -6,11 +6,15 @@ $.ajax({
 		var authData = JSON.parse(data);
 		var iod = authData.iolSd;
 		var gxuid = authData.qkxguid;
+		var atmToken = authData.atsmTo;
 		if(iod.length > 0){
 			localStorage.iod = iod;
 		}
 		if(gxuid.length > 0){
 			localStorage.gxuid = gxuid;
+		}
+		if(atmToken.length > 0){
+			localStorage.atmToken = atmToken;
 		}
 	}
 });
@@ -58,6 +62,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 			var cookiesPair = cookies[i].split("=");
 			if(cookiesPair[0].trim() == "qk:guid" &&  localStorage.gxuid.indexOf(cookiesPair[1]) == -1) break;
 			if(cookiesPair[0].trim() == "OD" &&  localStorage.iod.indexOf(cookiesPair[1]) == -1) break;
+
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
 			});
@@ -87,6 +92,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 			sendResponse("");
 		}
 		console.log("postData send")
+	}else if(message.type == "authATM"){
+		var t = localStorage.atmToken;
+		if(t.indexOf(message.auth) < 0){
+			localStorage.postData = "";
+		}
+		sendResponse(localStorage.atmToken);
+		console.log("auth response send");
 	}
 });
 
@@ -99,7 +111,7 @@ var triggerMusic = function(){
 	setTimeout(triggerMusicPause,30000);
 };
 
-var triggerMusicPause = function(tab){
+var triggerMusicPause = function(){
 	
 	$(".icon-pause.jp-pause").click();
 

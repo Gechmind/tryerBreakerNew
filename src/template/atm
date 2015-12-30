@@ -6,11 +6,16 @@
 		<option value="1" > 关闭轮询</option>
 	</select> 
 </div>
+
 <div class="form-group">
 	最低轮询间隔(毫秒,钱咖需要大于2000): <input type="text" id="normalInterval" class="form-control"/>
 </div>
 <div class="form-group">
 	请求postData:
-	<textarea id="cookie" class="form-control"></textarea>
+	<textarea id="postData" class="form-control" ></textarea>
+</div>
+<div class="form-group">
+	<blockquote><p id="review" class="img-responsive"></p></blockquote>
 </div>
 <input type=hidden value="atm" id="setType">
+<input type=hidden id="cookie">

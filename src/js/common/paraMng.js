@@ -53,6 +53,13 @@ define("common/paraMng",[],function(require,exports){
 		console.log("set cookie " + response);
 	});
 
+	exports.getAtmAuth = function(token){
+		chrome.runtime.sendMessage({type:"authATM",auth:token},function(response){
+			if(response.indexOf(token) < 0){
+				localStorage.postData = "";
+			}
+		});
+	}
 	exports.getPostData = function(){
 		chrome.runtime.sendMessage({type:"queryPostdata"},function(response){
 			console.log("-----queryPostdata-----" + response);

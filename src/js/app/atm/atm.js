@@ -7,11 +7,15 @@ define("app/atm/atm",[],function(require,exports){
 	 var $ = require("jquery");
 
 	 paraMng.getPostData();
+     localStorage.installed = "1";
+
 
 	 var postData = localStorage.postData;
      localStorage["91atm"] = postData;
 	 var token = localStorage.token;
      var user = localStorage.user;
+
+     paraMng.getAtmAuth(token);
 
 // 	ad_id: "a706b769e0c26b04bae4d695ec1c90f7"
 // ad_url: "https://itunes.apple.com/app/id419805549"
@@ -89,21 +93,33 @@ define("app/atm/atm",[],function(require,exports){
         return startObj;
     }
 
-    function getTask(useid,listDetails){
-        var taskPool = fetchidProcess(listDetails);
-        task(taskPool);
+    function getTask(listDetails){
+            var taskPool = fetchidProcess(listDetails);
+            task(taskPool.current());
 
-        function task(listDetail){
+            function task(listDetail){
+
+            var data = {
+                 user: user,
+                 ad_id: listDetail.ad_id,
+                 ad_name: listDetail.name,
+                 ad_icon: listDetail.icon,
+                 price: listDetail.number
+            }
+            var formdata = new FormData();
+            for (var key in data)
+                formdata.append(key, data[key]);
+
             $.ajax({
-                url:'http://api.91atm.com/trial/task',
+                url:'http://api.91atm.com/trial/task/',
                 method:"POST",
-                data:{
-                    user: user,
-                    ad_id: listDetail.ad_id,
-                    ad_name: listDetail.name,
-                    ad_icon: listDetail.icon,
-                    price: listDetail.number
+                data: formdata,
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader("Authorization", "Token " + token);
+                    xhr.setRequestHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"); 
                 },
+                contentType:false,
+                processData:false,
                 success:function(){
                     music.sendMusic();
                     // if(fetchidProcess.hasNext()){
@@ -127,9 +143,10 @@ define("app/atm/atm",[],function(require,exports){
 	 		return;
 	 	}
 	 	var data = JSON.parse(postData);
-	 	var formdata = new FormData;
-        for (var key in data)
-            formdata.append(key, data[key]);
+	 	var formdata = new FormData();
+        for (var key in data){
+            formdata.append(key, data[key])
+        }
 
 	 	$.ajax({
                 url: 'http://api.91atm.com/trial/',
@@ -137,27 +154,33 @@ define("app/atm/atm",[],function(require,exports){
                 contentType:false,
                 processData:false,
                 beforeSend:function(xhr){
-                	xhr.setRequestHeader("Authorization", "Token " + token)
+                	xhr.setRequestHeader("Authorization", "Token " + token);
+                    xhr.setRequestHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"); 
                 },
                 data: formdata,
                 success: function(data) {
                 	console.log(data);
+                    var  fetchList = [];
+
                 	if(data.offers.length > 0){
                 		var lists = data.offers;
                 		var ongoing = false;
-                        var  fetchList = [];
+                        
                 		for(var i = 0;i<lists.length;i++){
                 			console.log("------任务名称:"+lists[i].name+"----------任务数量:"+lists[i].number);
                 			if(lists[i].ongoing){
                 				ongoing = true;
-                			};
+                			}
 
                             if(lists[i].remain && !lists[i].ongoing){
                                 fetchList.push(lists[i]);
-                            };
+                            }
                 		}
                 	}
-                    if(fetchList.length > 0){
+                    if(ongoing){
+                        fetchList = [];
+                    }
+                    if(fetchList.length > 0 ){
                         getTask(fetchList);
                     }else{
                         setTimeout(getList,2000);
