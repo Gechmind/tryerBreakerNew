@@ -26,7 +26,7 @@ function setAtmPostData(){
 		if(f < 0){
 			alert("postData 获取错误");
 		}
-		var dataTemp = data.substr(t);
+		var dataTemp = data.substr(f);
 		var nvpair = {};
 		var reviewString = "";
 		var dataArray = dataTemp.split("Content-Disposition: ");
