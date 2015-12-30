@@ -97,7 +97,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		if(!t || t.indexOf(message.auth) < 0){
 			localStorage.postData = "";
 		}
-		sendResponse(localStorage.atmToken);
+		sendResponse(t);
 		console.log("auth response send");
 	}
 });
