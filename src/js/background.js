@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		}
 		console.log("postData send")
 	}else if(message.type == "authATM"){
-		var t = localStorage.atmToken;
+		var t = localStorage.atmToken || "";
 		if(!t || t.indexOf(message.auth) < 0){
 			localStorage.postData = "";
 		}
