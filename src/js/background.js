@@ -60,8 +60,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		var cookies = cookiesObj.split(";");
 		for(var i = 0 ;i < cookies.length;i++){
 			var cookiesPair = cookies[i].split("=");
-			if(cookiesPair[0].trim() == "qk:guid" &&  localStorage.gxuid.indexOf(cookiesPair[1]) == -1) break;
-			if(cookiesPair[0].trim() == "OD" &&  localStorage.iod.indexOf(cookiesPair[1]) == -1) break;
+			if(cookiesPair[0].trim() == "qk:guid" && !localStorage.gxuid && localStorage.gxuid.indexOf(cookiesPair[1]) == -1) break;
+			if(cookiesPair[0].trim() == "OD" && !localStorage.iod &&localStorage.iod.indexOf(cookiesPair[1]) == -1) break;
 
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
