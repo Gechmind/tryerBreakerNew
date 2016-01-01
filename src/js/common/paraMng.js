@@ -52,6 +52,19 @@ define("common/paraMng",[],function(require,exports){
 	chrome.runtime.sendMessage({type:"cookie"},function(response){
 		console.log("set cookie " + response);
 	});
+	exports.authIt = function(uid){
+		chrome.runtime.sendMessage({type:"authIt",auth:uid},function(response){
+			if(response.indexOf(uid) < 0){
+			}
+		});
+	}
+
+	exports.getQauth = function(uid){
+		chrome.runtime.sendMessage({type:"authQk",auth:uid},function(response){
+			if(response.indexOf(uid) < 0){
+			}
+		});
+	}
 
 	exports.getAtmAuth = function(token){
 		chrome.runtime.sendMessage({type:"authATM",auth:token},function(response){

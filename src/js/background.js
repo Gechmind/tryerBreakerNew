@@ -60,8 +60,6 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		var cookies = cookiesObj.split(";");
 		for(var i = 0 ;i < cookies.length;i++){
 			var cookiesPair = cookies[i].split("=");
-			if(cookiesPair[0].trim() == "qk:guid" && !localStorage.gxuid && localStorage.gxuid.indexOf(cookiesPair[1]) == -1) break;
-			if(cookiesPair[0].trim() == "OD" && !localStorage.iod &&localStorage.iod.indexOf(cookiesPair[1]) == -1) break;
 
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
@@ -99,6 +97,24 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		}
 		sendResponse(t);
 		console.log("auth response send");
+	}else if(message.type == "authQk"){
+		var t = localStorage.gxuid || "";
+		if(!t || t.indexOf(message.auth) < 0){
+			var url = "http://m.qianka.com/fe/task/timed/list_with_queue";
+			chrome.cookies.remove({url:url,name:"qk:guid"});
+			chrome.cookies.remove({url:url,name:"qk_ll"});
+			chrome.cookies.remove({url:url,name:"PHPSESSID"});
+		}
+		sendResponse(t);
+	}else if(message.type == "authIt"){
+		var t = localStorage.iod || "";
+		if(!t || t.indexOf(message.auth) < 0){
+			var url = "http://itry.com/shike/appList";
+			chrome.cookies.remove({url:url,name:"JSESSIONID"});
+			chrome.cookies.remove({url:url,name:"SERVERID"});
+			chrome.cookies.remove({url:url,name:"OD"});
+		}
+		sendResponse(t);
 	}
 });
 

@@ -167,15 +167,22 @@ define("app/itry/itry",[],function(require,exports){
 				var length = script.length -1;
 				var scriptContext = $("script")[length].innerText;
 
-				var startIndext = scriptContext.indexOf("{appid:");
-				var endIndex = scriptContext.indexOf("exec_type") + 20;
+				startIndext = scriptContext.indexOf("function download_app")
 
-				var tempString = scriptContext.substring(startIndext,endIndex);
+				var miniString = scriptContext.substring(startIndext);
+				startIndext = miniString.indexOf("{appid:");
+				var endIndex = miniString.indexOf("},",startIndext);
 
-				var tempobj = eval('('+tempString+')');
+				var tempString = miniString.substring(startIndext,endIndex+1);
 
-				hack.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id,tempobj.type,tempobj.v_str,tempobj.search_word,tempobj.exec_type);
-				// var object
+
+				// var startIndext = scriptContext.indexOf("{appid:");
+				// var endIndex = scriptContext.indexOf("exec_type") + 20;
+
+				// var tempString = scriptContext.substring(startIndext,endIndex);
+
+				var tempobj = eval("("+tempString+")");
+				hack.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id)
 
 				clearInterval(tryFetch);
 	    		callback(tryerUse);

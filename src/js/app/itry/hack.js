@@ -6,6 +6,8 @@ define("app/itry/hack",[],function(require,exports){
 	var  totalRequestCount = 0;
 	var hasTask = false;
 	var multiTask = "0";//多任务
+	var authed = false;
+
 
 	if(localStorage.multiTask == "1"){//开启多任务
 		multiTask = "1";
@@ -40,11 +42,11 @@ define("app/itry/hack",[],function(require,exports){
     };
 
     //4、拷贝关键字
-	exports.h_download_app = function(appid,user_id,order_Id,type,v_str,search_word,exec_type){
+	exports.h_download_app = function(appid,user_id,order_Id){
 		$.ajax({
 	        type : "post",
 	        url : "/shike/user_click_record",
-	        data : {appid:appid,user_id:user_id,order_Id:order_Id,type:type,v_str:v_str,search_word:search_word,exec_type:exec_type},
+	        data : {appid:appid,user_id:user_id,order_Id:order_Id},
 	        dataType: 'text',
 	        async : false,
 	        success : function(num){
@@ -79,13 +81,13 @@ define("app/itry/hack",[],function(require,exports){
 	        	if(backPage && backPage.length > 0 &&( startIndext = backPage.indexOf("function download_app"),startIndext > 0)){
 					var miniString = backPage.substring(startIndext);
 					startIndext = miniString.indexOf("{appid:");
-					var endIndex = miniString.indexOf("exec_type") + 20;
+					var endIndex = miniString.indexOf("},",startIndext);
+					var tempString = miniString.substring(startIndext,endIndex+1);
 
-					var tempString = miniString.substring(startIndext,endIndex);
+					var tempobj = eval("("+tempString+")");
+					exports.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id);
 
-					var tempobj = eval('('+tempString+')');
-
-					exports.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id,tempobj.type,tempobj.v_str,tempobj.search_word,tempobj.exec_type);
+					// exports.h_download_app(tempobj.appid,tempobj.user_id,tempobj.order_Id,tempobj.type,tempobj.v_str,tempobj.search_word,tempobj.exec_type);
 					// var object
 	        	}
 	        	//消费
@@ -122,7 +124,7 @@ define("app/itry/hack",[],function(require,exports){
 		$.ajax({
 	        type : "post",
 	        url : "/shike/user_click_record",
-	        data : {appid:appid,user_id:user_id,order_Id:order_id,type:"app",exec_type:'list',cache:false},
+	        data : {appid:appid,user_id:user_id,order_Id:order_id,type:"app"},
 	        dataType: 'text',
 	        async : false,
 	        success : function(num){
@@ -164,6 +166,11 @@ define("app/itry/hack",[],function(require,exports){
     	var hackMethod = exports.hack_btnStatus;
     		
         function insideGet(){
+
+        	if(!authed){
+        		paraMng.authIt(user_id);
+        		authed = true;
+        	}
         		
 			$.ajax({
 			 type:"post",

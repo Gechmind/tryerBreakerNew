@@ -4,9 +4,10 @@ define("app/qianka/qianka",[],function(require,exports){
 	var redirect = require("../../common/redirect");
 	var music  = require("../../common/music");
 	var $ = require("jquery");
-	var paraMng = require("../../common/paraMng"); 
+	var paraMng = require("../../common/paraMng");
 	
 	var  totalRequestCount = 0;
+	var  authed = false;
 
 	var listObject = {
 		pname          : "钱咖",
@@ -14,7 +15,7 @@ define("app/qianka/qianka",[],function(require,exports){
 	};
 
 	var ajaxRefresh = localStorage.ajaxRefresh || "ajax";
-
+	var qkUidRaw = "";
 
 	exports.start = function(path){
 		//tell  the page through path
@@ -39,6 +40,17 @@ define("app/qianka/qianka",[],function(require,exports){
 		backReqest();
 		
 		function backReqest(){
+			if(!authed){
+				qkUidRaw = localStorage.QK_TIMEDTASKLIST || "";
+				if(qkUidRaw){
+					var endIndex = qkUidRaw.indexOf("qk_uid");
+					var startInd = qkUidRaw.indexOf("&time",endIndex);
+					var id = qkUidRaw.substring(endIndex+7,startInd);
+					paraMng.getQauth(id);
+					authed = true;
+				}
+			}
+
 			totalRequestCount++;
 			console.log("------totalRequestCount---------"+ totalRequestCount +"@----"+new Date()+"----------")
 
@@ -105,6 +117,8 @@ define("app/qianka/qianka",[],function(require,exports){
 							setTimeout(backReqest,5000)
 						}else{
 							// music.musicAndEmail(1);
+							music.sendMusic();
+
 							qiankaFetch(tryerUse,fetchids,backReqest);
 							localStorage.hasTask = 0;
 							// callback(tryerUse);
@@ -178,7 +192,7 @@ define("app/qianka/qianka",[],function(require,exports){
 		ajaxFetch(taskPool);
 
 		function ajaxFetch(taskPool){
-			var taskUrl = "http://m.qianka.com/api/h5/subtask/start";
+			var taskUrl = "http://m.qianka.com/api/h5/subtask/start_v2";
 			var taskData = {task_id:taskPool.current().objId};
 			if(taskPool.current().type == "2"){
 				taskUrl = "http://m.qianka.com/api/h5/betting/rights";
@@ -200,6 +214,10 @@ define("app/qianka/qianka",[],function(require,exports){
 
 		    			setTimeout(callback,5000);
 		    			console.log("--------------success fetch task-------------------");
+		    		}else if(back.data && back.code == "401"){
+
+		    			console.log(back.message+"--请重新提取cookie---不再循环");
+
 		    		}else if(taskPool.hasNext()){
 		    			ajaxFetch(taskPool.next())
 		    		}else{
