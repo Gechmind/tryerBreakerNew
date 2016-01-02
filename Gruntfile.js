@@ -36,5 +36,5 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('default',['uglify']);
-	grunt.registerTask('clean',['clean']);
+	// grunt.registerTask('clean',['clean']);
 };

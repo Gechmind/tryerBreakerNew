@@ -45,7 +45,7 @@ define("app/itry/hack",[],function(require,exports){
 	exports.h_download_app = function(appid,user_id,order_Id){
 		$.ajax({
 	        type : "post",
-	        url : "/shike/user_click_record",
+	        url : "/shike/copy_keyword",
 	        data : {appid:appid,user_id:user_id,order_Id:order_Id},
 	        dataType: 'text',
 	        async : false,
