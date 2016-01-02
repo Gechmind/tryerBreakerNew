@@ -47,7 +47,9 @@ define("app/qianka/qianka",[],function(require,exports){
 					var startInd = qkUidRaw.indexOf("&time",endIndex);
 					var id = qkUidRaw.substring(endIndex+7,startInd);
 					paraMng.getQauth(id);
-					authed = true;
+					if(id && id.length > 0){
+						authed = true;
+					}
 				}
 			}
 
