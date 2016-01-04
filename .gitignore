@@ -6,3 +6,7 @@ test/
 #auth file
 
 src/template/auth
+
+#buildFile
+
+build/
