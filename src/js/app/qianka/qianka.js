@@ -216,7 +216,7 @@ define("app/qianka/qianka",[],function(require,exports){
 		    				music.sendMusic();
 
 		    				setTimeout(callback,4000);
-		    				console.log("--------------success fetch task-------------------");
+		    				console.log("--------------success fetch task- +------------------");
 		    				
 		    			}else{
 		    				console.log(back.data.msg);
