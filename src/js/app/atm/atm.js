@@ -6,6 +6,8 @@ define("app/atm/atm",[],function(require,exports){
 
 	 var $ = require("jquery");
 
+     var tipMiss = false;
+
 	 paraMng.getPostData();
      localStorage.installed = "1";
 
@@ -17,7 +19,6 @@ define("app/atm/atm",[],function(require,exports){
 
      paraMng.getAtmAuth(token);
 
-     $(".alert-wrap").css({"display":"none"});
 
 // 	ad_id: "a706b769e0c26b04bae4d695ec1c90f7"
 // ad_url: "https://itunes.apple.com/app/id419805549"
@@ -95,6 +96,26 @@ define("app/atm/atm",[],function(require,exports){
         return startObj;
     }
 
+    function setCopyMessage(listDetail){
+        var detail = listDetail.href_params + "&user=" + user;
+
+            $.ajax({
+                method:"GET",
+                url:'/trial/task/download/?'+detail,
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader("Authorization", "Token " + token);
+                },
+                success:function(){
+                    console.log("copy key word is done");
+                    setTimeout(getList,2000);
+                },
+                error:function(){
+                    setTimeout(getList,2000);
+                }
+            })
+
+    }
+
     function getTask(listDetails){
             var taskPool = fetchidProcess(listDetails);
             task(taskPool.current());
@@ -128,7 +149,7 @@ define("app/atm/atm",[],function(require,exports){
                     // }else{
                     //     setTimeout(getList,2000);
                     // }
-                    setTimeout(getList,2000);
+                    setCopyMessage(listDetail);
                 },
                 error:function(){
                     setTimeout(getList,2000);
@@ -139,6 +160,12 @@ define("app/atm/atm",[],function(require,exports){
      }
 
 	 function getList(){
+        if(!tipMiss && $(".alert-wrap").length > 0){
+             $(".alert-wrap").css({"display":"none"});
+             tipMiss = true;
+        }
+       
+
 	 	if(!postData){
 	 		console.log("cookie 配置失败");
 	 		return;
@@ -167,7 +194,7 @@ define("app/atm/atm",[],function(require,exports){
                 		var ongoing = false;
                         
                 		for(var i = 0;i<lists.length;i++){
-                			console.log("------任务名称:"+lists[i].name+"----------任务数量:"+lists[i].number);
+                			console.log("------任务名称:"+lists[i].name+"----------任务数量:"+lists[i].remain);
                 			if(lists[i].ongoing){
                 				ongoing = true;
                 			}

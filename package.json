@@ -6,10 +6,16 @@
     "grunt-cmd-concat": "^0.2.8",
     "grunt-cmd-transport": "^0.5.1",
     "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-htmlmin": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-uglify": "^0.11.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-crx": "^0.3.4",
+    "grunt-zip-to-crx": "^0.1.4"
+  },
+  "dependencies": {
+    "archiver": "^0.21.0"
   }
 }

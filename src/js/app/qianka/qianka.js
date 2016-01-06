@@ -28,7 +28,7 @@ define("app/qianka/qianka",[],function(require,exports){
 
 	function qiankaAssertBack(tryerUse,time){
 		//刷新
-		var intervalTime = time || 5000;
+		var intervalTime = time || 4000;
 		redirect.start(tryerUse.triggerPatten,false,0,intervalTime);
 	}
 
@@ -74,7 +74,7 @@ define("app/qianka/qianka",[],function(require,exports){
 							callback(tryerUse);
 						}else if(resObj.code == 405){//过频繁
 							console.log(resObj.message);
-							setTimeout(backReqest,60000);//休息一分钟
+							setTimeout(backReqest,40000);//休息一分钟
 						}
 
 						var singleObj;
@@ -116,7 +116,7 @@ define("app/qianka/qianka",[],function(require,exports){
 					    	}
 						//刷新
 						if(ls == 0){
-							setTimeout(backReqest,5000)
+							setTimeout(backReqest,4000)
 						}else{
 							// music.musicAndEmail(1);
 							music.sendMusic();
@@ -127,14 +127,14 @@ define("app/qianka/qianka",[],function(require,exports){
 						}
 
 					}else{
-						setTimeout(backReqest,5000);
+						setTimeout(backReqest,4000);
 					}
 				}
 
 			};
 
 			xhr.onerror = function(){
-				setTimeout(backReqest,5000);
+				setTimeout(backReqest,4000);
 			};
 
 			xhr.send();
@@ -210,12 +210,19 @@ define("app/qianka/qianka",[],function(require,exports){
 		    		back = JSON.parse(back);
 		    		if(back.data && back.code == "200"){
 		    			// music.musicAndEmail(1);
-		    			console.log("send music request");
+		    			if(back.data.type == 1){
+		    				console.log("send music request");
 		    			
-		    			music.sendMusic();
+		    				music.sendMusic();
 
-		    			setTimeout(callback,5000);
-		    			console.log("--------------success fetch task-------------------");
+		    				setTimeout(callback,4000);
+		    				console.log("--------------success fetch task-------------------");
+		    				
+		    			}else{
+		    				console.log(back.data.msg);
+		    				setTimeout(callback,4000);
+		    			}
+		    			
 		    		}else if(back.data && back.code == "401"){
 
 		    			console.log(back.message+"--请重新提取cookie---不再循环");
@@ -223,11 +230,11 @@ define("app/qianka/qianka",[],function(require,exports){
 		    		}else if(taskPool.hasNext()){
 		    			ajaxFetch(taskPool.next())
 		    		}else{
-		    			setTimeout(callback,5000);
+		    			setTimeout(callback,4000);
 		    		}
 		    	},
 		    	onerror:function(){
-		    		setTimeout(callback,5000);
+		    		setTimeout(callback,4000);
 		    	}
 		    });
 		}
