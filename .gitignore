@@ -10,3 +10,7 @@ src/template/auth
 #buildFile
 
 build/
+
+#distict
+
+dist/
