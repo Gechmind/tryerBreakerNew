@@ -8,6 +8,7 @@ define("app/qianka/qianka",[],function(require,exports){
 	
 	var  totalRequestCount = 0;
 	var  authed = false;
+	var  ongingid;
 
 	var listObject = {
 		pname          : "钱咖",
@@ -89,6 +90,7 @@ define("app/qianka/qianka",[],function(require,exports){
 							}
 
 							if(!taskProcessing ||  singleObj.type == 2){
+
 								console.log("status----"+singleObj.status+"type----"+singleObj.type+"qty----"+singleObj.qty+"--title--"+singleObj.title);
 							}
 							 //type  1：可抢的 或者 已完成  2、下注 3、邀请好友  4、预告
@@ -96,6 +98,12 @@ define("app/qianka/qianka",[],function(require,exports){
 
 							if(singleObj.status == 2 && singleObj.type == 1){//有进行中任务则退出、下注资格可以继续抢
 								taskProcessing = true;
+
+								if(!ongingid){
+									music.sendMusic();
+								}
+								ongingid = singleObj.id;
+								
 							}else if(singleObj.status == 1 && singleObj.type == 1 && singleObj.qty > 0){
 								fetchids.push({objId:singleObj.id,reward:+singleObj.reward,type:singleObj.type});
 								ls++;
@@ -108,18 +116,20 @@ define("app/qianka/qianka",[],function(require,exports){
 						if(taskProcessing == true){//先清空
 							fetchids = [];
 							ls = 0;
+						}else{
+							ongingid = "";
 						}
 
-					    	if(gamingIds.length > 0){//直接执行
-					    		fetchids = gamingIds;
-					    		ls = 1;
-					    	}
+				    	if(gamingIds.length > 0){//直接执行
+				    		fetchids = gamingIds;
+				    		ls = 1;
+				    	}
 						//刷新
 						if(ls == 0){
 							setTimeout(backReqest,4000)
 						}else{
 							// music.musicAndEmail(1);
-							music.sendMusic();
+							// music.sendMusic();
 
 							qiankaFetch(tryerUse,fetchids,backReqest);
 							localStorage.hasTask = 0;
@@ -212,11 +222,12 @@ define("app/qianka/qianka",[],function(require,exports){
 		    			// music.musicAndEmail(1);
 		    			if(back.data.type == 1){
 		    				console.log("send music request");
-		    			
-		    				music.sendMusic();
-
+		    				if(!(back.data.msg.indexOf("排队中") > -1)){
+		    					// music.sendMusic();
+		    					console.log("--------------success fetch task- +------------------");
+		    				}
 		    				setTimeout(callback,4000);
-		    				console.log("--------------success fetch task- +------------------");
+		    				
 		    				
 		    			}else{
 		    				console.log(back.data.msg);
