@@ -6,7 +6,7 @@
   "version": "1.1.1",
 
   "browser_action": {
-    "default_icon": "imagesicon.png",
+    "default_icon": "images/icon.png",
     "default_title": "Click here!"
   },
   "permissions": [
@@ -14,30 +14,30 @@
     "clipboardRead",
     "clipboardWrite",
     "tabs",
-    "*:**"
+    "*://*/*"
   ],
   "background":{
-      "page"    : "htmlbackground.html"
+      "page"    : "html/background.html"
   },
-  "options_page":"htmloptions.html",
+  "options_page":"html/options.html",
   "content_scripts":[
     {
-      "matches":["http:itry.com*","http:r.ow.domob.cnwxui*","http:ow.miidi.netow*","http:localhost:18080itry*","http:m.qianka.com*","http:m.shiwan123.com*","http:api.91atm.com*"],
+      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com/*","http://api.91atm.com/*"],
       "js":[
-            "jssea-modulesseajs2.2.0sea-debug.js",
-            "jssea-modulesjquery1.10.1jquery-debug.js",
-            "jscommonmusic.js",
-            "jscommonparaMng.js",
-            "jscommonredirect.js",
-            "jsappitryhack.js",
-            "jsappitryitry.js",
-            "jsappqiankaqianka.js",
-            "jsappdomobdomob.js",
-            "jsappatmatm.js",
-            "jsappmiidimiidi.js",
-            "jsapppandapanda.js",
-            "jsappreloadNotions.js",
-            "jscontent-script.js"
+            "js/sea-modules/seajs/2.2.0/sea-debug.js",
+            "js/sea-modules/jquery/1.10.1/jquery-debug.js",
+            "js/common/music.js",
+            "js/common/paraMng.js",
+            "js/common/redirect.js",
+            "js/app/itry/hack.js",
+            "js/app/itry/itry.js",
+            "js/app/qianka/qianka.js",
+            "js/app/domob/domob.js",
+            "js/app/atm/atm.js",
+            "js/app/miidi/miidi.js",
+            "js/app/panda/panda.js",
+            "js/app/reloadNotions.js",
+            "js/content-script.js"
           ]
     }
   ]

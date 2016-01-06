@@ -140,7 +140,9 @@ module.exports = function(grunt){
 		},
 		crx:{
 			breaker: {
-				privateKey:"dist/tryerBreakerNew.pem",
+				options:{
+					privateKey:"dist/tryerBreakerNew.pem",
+				},
 				src:"dist/build/**",
 				dest:"dist/",
 				filename:"breaker"
