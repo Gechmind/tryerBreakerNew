@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1],
-					expirationDate::+exp
+					expirationDate:+exp
 			}));
 		}
 		sendResponse("it's done");
