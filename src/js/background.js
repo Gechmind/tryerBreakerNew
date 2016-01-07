@@ -66,12 +66,17 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
 			});
-			chrome.cookies.set({url:url,
+			"JSESSIONID" == cookiesPair[0].trim() ? chrome.cookies.set({url:url,
+					name:cookiesPair[0].trim(),
+					domain:domain,
+					path:"/",
+					value:cookiesPair[1]
+			}):chrome.cookies.set({url:url,
 					name:cookiesPair[0].trim(),
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1],
-					expirationDate:"JSESSIONID" == cookiesPair[0].trim()?"":+exp
+					expirationDate::+exp
 			});
 		}
 		sendResponse("it's done");
