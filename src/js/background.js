@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 			});
 			"JSESSIONID" == cookiesPair[0].trim() ? chrome.cookies.set({url:url,
 					name:cookiesPair[0].trim(),
-					domain:domain,
+					domain:"itry.com",
 					path:"/",
 					value:cookiesPair[1]
 			}):(chrome.cookies.set({url:url,
