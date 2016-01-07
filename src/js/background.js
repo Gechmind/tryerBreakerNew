@@ -71,13 +71,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1]
-			}):chrome.cookies.set({url:url,
+			}):(chrome.cookies.set({url:url,
 					name:cookiesPair[0].trim(),
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1],
 					expirationDate::+exp
-			});
+			}));
 		}
 		sendResponse("it's done");
 	}else if(message.type == "setItryId"){
