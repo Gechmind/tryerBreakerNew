@@ -9,10 +9,13 @@ module.exports = function(grunt){
         domob :['\"js/app/domob/domob.js\",'],
         atm   :['\"js/app/atm/atm.js\",'],
         panda :['\"js/app/panda/panda.js\",'],
-        miidi :['\"js/app/miidi/miidi.js\",']
+        miidi :['\"js/app/miidi/miidi.js\",'],
+        authcontent:{},
+        personName:""
 	};
 
 	grunt.initConfig({
+		personName:contentCtrl.personName,
 		pkg: grunt.file.readJSON('package.json'),
 
 		uglify: {	
@@ -39,7 +42,7 @@ module.exports = function(grunt){
 		          		}
 		          		return true;
 		          },
-		          dest: 'build/',   
+		          dest: 'dist/build/',   
 		          // Destination path prefix.
 		          ext: '.js',   // Dest filepaths will have this extension.
 		          extDot: 'last'   // Extensions in filenames begin after the first dot
@@ -49,7 +52,7 @@ module.exports = function(grunt){
 		},
 		clean: {
 			dist:{
-				src:['build/*']
+				src:['dist/build/*']
 			}
 		},
 		htmlmin:{
@@ -62,58 +65,65 @@ module.exports = function(grunt){
 				{expand:true,
 				 cwd:'src/',
 				 src: ['**/*.html'],
-				 dest: 'build/'
+				 dest: 'dist/build/'
 				}]
 			}
 		},
 		copy:{
-			options:{
-				noProcess:['src/images/*','src/css/*','src/html/Jplayer.swf'],//支持通配符
-				process:function(content, srcpath){
-						
-						if(srcpath.indexOf("manifest") > -1){
-							grunt.log.writeln("process:" + srcpath);
-							var t = content;
-							for(var i = 0;i< contentCtrl.path.length;i++){
-								contentCtrl[contentCtrl.path[i]].forEach(function(value){
-
-									grunt.log.writeln(contentCtrl.path[i]);
-
-									if(contentCtrl.pathInclude.indexOf(contentCtrl.path[i]) > -1)return;
-									
-									var pattern = new RegExp(value,"g");
-
-									
-									// grunt.log.writeln(pattern.test(t));
-									t =  t.replace(pattern,"");
-								})
-							}
-							return t;
-						}else{
-							return content;
-						}
-				}
-			},
 			src:{
 				files:[{
 				 expand:true,
 				 cwd:'src/images/',
 				 src: ['**/*'],
-				 dest: 'build/images'
+				 dest: 'dist/build/images'
 				},{
 				 expand:true,
 				 cwd:'src/css/',
 				 src: ['**/*'],
-				 dest: 'build/css'
+				 dest: 'dist/build/css'
 				}]
 			},
 			manifest:{
+				options:{
+					// noProcess:['src/images/*','src/css/*','src/html/Jplayer.swf'],//支持通配符
+					process:function(content, srcpath){
+							
+							if(srcpath.indexOf("manifest") > -1){
+								var t = content.replace("breaker",contentCtrl.personName);
+								for(var i = 0;i< contentCtrl.path.length;i++){
+									contentCtrl[contentCtrl.path[i]].forEach(function(value){
+
+
+										if(contentCtrl.pathInclude.indexOf(contentCtrl.path[i]) > -1)return;
+										
+										var pattern = new RegExp(value,"g");
+
+										
+										// grunt.log.writeln(pattern.test(t));
+										t =  t.replace(pattern,"");
+									})
+								}
+								return t;
+							}else{
+								return content;
+							}
+					}
+				},
 				src:"src/manifest.json",
-				dest:"build/manifest.json"
+				dest:"dist/build/manifest.json"
 			},
 			swf:{
 				src:"src/html/Jplayer.swf",
-				dest:"build/html/Jplayer.swf"
+				dest:"dist/build/html/Jplayer.swf"
+			},
+			auth:{
+				options:{
+					process:function(content,srcpath){
+						return content = JSON.stringify(contentCtrl.authcontent);
+					}
+				},
+				src:"src/template/auth.json",
+				dest:"dist/build/template/auth.json"
 			}
 		},
 		compress: {
@@ -123,15 +133,15 @@ module.exports = function(grunt){
 			      archive:'build.zip'
 			    },
 			    expand: true,
-			    cwd: 'build',
+			    cwd: 'dist/build',
 			    src: ['**/*'],
-			    dest:'build'
+			    dest:'dist/build'
 
 			   }
 		},
 		zip_to_crx:{
 			options:{
-				privateKey:"tryerBreakerNew.pem"
+				privateKey:"buss/tryerBreakerNew.pem"
 			},
 			build:{
 				src :"build.zip",
@@ -141,11 +151,10 @@ module.exports = function(grunt){
 		crx:{
 			breaker: {
 				options:{
-					privateKey:"dist/tryerBreakerNew.pem",
+					privateKey:"buss/tryerBreakerNew.pem",
 				},
 				src:"dist/build/**",
-				dest:"dist/",
-				filename:"breaker"
+				dest:"dist/"
 			}
 		}
 	});
@@ -175,4 +184,32 @@ module.exports = function(grunt){
     	}
     	grunt.task.run(['clean','uglify','htmlmin','copy','uglify','compress']);
 	});
+
+	grunt.registerTask('person','grunt use person name',function(personName){
+		var allPerson =grunt.file.readJSON('buss/buyerDetail.json',{encoding:"UTF-8"});
+		var personDetail = allPerson[personName];
+		// console.log(allPerson)
+		if(!personDetail){
+			console.log("不存在该用户");
+			return
+		}
+		var pdList = [];
+		if(personDetail.iolSd.length > 0){
+			pdList.push("itry");
+		}
+		if(personDetail.qkxguid.length > 0){
+			pdList.push("qianka");
+		} 
+		if(personDetail.atsmTo.length > 0){
+			pdList.push("atm");
+		}
+		if(personDetail.domob.length > 0){
+			pdList.push("domob");
+		}
+		contentCtrl.personName = personDetail.nickname+"/breaker";
+		contentCtrl.authcontent = personDetail;
+		contentCtrl.pathInclude = pdList;
+		// grunt.task.run("copy:auth");
+		grunt.task.run(['clean','uglify','htmlmin','copy','uglify','crx']);
+	})
 };

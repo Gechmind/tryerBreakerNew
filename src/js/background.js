@@ -1,6 +1,6 @@
 'use strict';
 $.ajax({
-	url:chrome.extension.getURL("/")+"template/auth",
+	url:chrome.extension.getURL("/")+"template/auth.json",
 	type:"GET",
 	success:function(data){
 		var authData = JSON.parse(data);
@@ -18,6 +18,8 @@ $.ajax({
 		}
 	}
 });
+//背景页控制header,替换user_Agent
+
 //背景项用来控制页面轮训
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	//default circle
@@ -69,7 +71,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1],
-					expirationDate:+exp
+					expirationDate:"JSESSIONID" == cookiesPair[0].trim()?"":+exp
 			});
 		}
 		sendResponse("it's done");

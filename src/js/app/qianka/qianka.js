@@ -99,7 +99,7 @@ define("app/qianka/qianka",[],function(require,exports){
 							if(singleObj.status == 2 && singleObj.type == 1){//有进行中任务则退出、下注资格可以继续抢
 								taskProcessing = true;
 
-								if(!ongingid){
+								if(ongingid == ""){
 									music.sendMusic();
 								}
 								ongingid = singleObj.id;
@@ -221,13 +221,11 @@ define("app/qianka/qianka",[],function(require,exports){
 		    		if(back.data && back.code == "200"){
 		    			// music.musicAndEmail(1);
 		    			if(back.data.type == 1){
-		    				console.log("send music request");
-		    				if(!(back.data.msg.indexOf("排队中") > -1)){
+		    				// console.log("success push");
 		    					// music.sendMusic();
-		    					console.log("--------------success fetch task- +------------------");
-		    				}
+		    				console.log("--------------加入服务器排队队列------------------");
+		    		
 		    				setTimeout(callback,4000);
-		    				
 		    				
 		    			}else{
 		    				console.log(back.data.msg);
