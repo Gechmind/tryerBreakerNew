@@ -1,15 +1,10 @@
 # Dependency directory
 node_modules/
 
-test/
-
-#auth file
-
-src/template/auth
-
-#buildFile
-
-build/
+test
 
 #distict
+dist
 
+#temp
+tmp
