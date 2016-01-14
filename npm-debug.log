@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'weinre' ]
+2 info using npm@2.12.1
+3 info using node@v0.12.7
+4 verbose node symlink /usr/local/bin/node
+5 verbose install initial load of /Users/chenchen/Documents/coding/newTryer/package.json
+6 warn package.json breaker@1.0.1 No description
+7 warn package.json breaker@1.0.1 No repository field.
+8 warn package.json breaker@1.0.1 No README data
+9 warn package.json breaker@1.0.1 No license field.
+10 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/archiver/package.json
+11 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt/package.json
+12 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-cmd-concat/package.json
+13 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-cmd-transport/package.json
+14 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-clean/package.json
+15 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-compress/package.json
+16 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-copy/package.json
+17 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-htmlmin/package.json
+18 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-jshint/package.json
+19 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-uglify/package.json
+20 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-contrib-watch/package.json
+21 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-crx/package.json
+22 verbose installManyTop reading scoped package data from /Users/chenchen/Documents/coding/newTryer/node_modules/grunt-zip-to-crx/package.json
+23 info package.json grunt-cmd-concat@0.2.8 No license field.
+24 info package.json grunt-cmd-transport@0.5.1 No license field.
+25 info package.json grunt@0.4.5 No license field.
+26 info package.json grunt-contrib-watch@0.6.1 No license field.
+27 info package.json grunt-crx@1.0.3 No license field.
+28 info package.json grunt-zip-to-crx@0.1.4 No license field.
+29 verbose readDependencies loading dependencies from /Users/chenchen/Documents/coding/newTryer/package.json
+30 silly cache add args [ 'weinre', null ]
+31 verbose cache add spec weinre
+32 silly cache add parsed spec { raw: 'weinre',
+32 silly cache add   scope: null,
+32 silly cache add   name: 'weinre',
+32 silly cache add   rawSpec: '',
+32 silly cache add   spec: '*',
+32 silly cache add   type: 'range' }
+33 silly addNamed weinre@*
+34 verbose addNamed "*" is a valid semver range for weinre
+35 silly addNameRange { name: 'weinre', range: '*', hasData: false }
+36 silly mapToRegistry name weinre
+37 silly mapToRegistry using default registry
+38 silly mapToRegistry registry https://registry.npmjs.org/
+39 silly mapToRegistry uri https://registry.npmjs.org/weinre
+40 verbose addNameRange registry:https://registry.npmjs.org/weinre not in flight; fetching
+41 verbose request uri https://registry.npmjs.org/weinre
+42 verbose request no auth needed
+43 info attempt registry request try #1 at 21:46:27
+44 verbose request id a3e6ccb284f099f2
+45 verbose etag "D3RHX459H6HCY35CKPX1ZFRH8"
+46 http request GET https://registry.npmjs.org/weinre
+47 http 304 https://registry.npmjs.org/weinre
+48 silly get cb [ 304,
+48 silly get   { date: 'Mon, 11 Jan 2016 13:46:28 GMT',
+48 silly get     via: '1.1 varnish',
+48 silly get     'cache-control': 'max-age=300',
+48 silly get     etag: '"D3RHX459H6HCY35CKPX1ZFRH8"',
+48 silly get     age: '231',
+48 silly get     connection: 'keep-alive',
+48 silly get     'x-served-by': 'cache-lax1430-LAX',
+48 silly get     'x-cache': 'HIT',
+48 silly get     'x-cache-hits': '9',
+48 silly get     'x-timer': 'S1452519988.878090,VS0,VE0',
+48 silly get     vary: 'Accept' } ]
+49 verbose etag https://registry.npmjs.org/weinre from cache
+50 verbose get saving weinre to /Users/chenchen/.npm/registry.npmjs.org/weinre/.cache.json
+51 silly addNameRange number 2 { name: 'weinre', range: '*', hasData: true }
+52 silly addNameRange versions [ 'weinre',
+52 silly addNameRange   [ '2.0.0-pre-H0WTHDO5-incubating',
+52 silly addNameRange     '2.0.0-pre-H1GCS73N-incubating',
+52 silly addNameRange     '2.0.0-pre-H3FWTQKQ-incubating',
+52 silly addNameRange     '2.0.0-pre-H41DGW8S-incubating',
+52 silly addNameRange     '2.0.0-pre-H8EOSCLN-incubating',
+52 silly addNameRange     '2.0.0-pre-H9PU2WST-incubating',
+52 silly addNameRange     '2.0.0-pre-HA5N9T49',
+52 silly addNameRange     '2.0.0-pre-HG9PLCRF',
+52 silly addNameRange     '2.0.0-pre-HH0SN197',
+52 silly addNameRange     '2.0.0-pre-HYFXM3QM',
+52 silly addNameRange     '2.0.0-pre-HZ79PDUK',
+52 silly addNameRange     '2.0.0-pre-HZO3BMNG',
+52 silly addNameRange     '2.0.0-pre-I0Z7U9OV' ] ]
+53 verbose stack Error: No compatible version found: weinre@'*'
+53 verbose stack Valid install targets:
+53 verbose stack ["2.0.0-pre-H0WTHDO5-incubating","2.0.0-pre-H1GCS73N-incubating","2.0.0-pre-H3FWTQKQ-incubating","2.0.0-pre-H41DGW8S-incubating","2.0.0-pre-H8EOSCLN-incubating","2.0.0-pre-H9PU2WST-incubating","2.0.0-pre-HA5N9T49","2.0.0-pre-HG9PLCRF","2.0.0-pre-HH0SN197","2.0.0-pre-HYFXM3QM","2.0.0-pre-HZ79PDUK","2.0.0-pre-HZO3BMNG","2.0.0-pre-I0Z7U9OV"]
+53 verbose stack
+53 verbose stack     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:274:12)
+53 verbose stack     at next (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:253:17)
+53 verbose stack     at setData (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:230:5)
+53 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+53 verbose stack     at f (/usr/local/lib/node_modules/npm/node_modules/once/once.js:17:25)
+53 verbose stack     at fixName (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:29:5)
+53 verbose stack     at saved (/usr/local/lib/node_modules/npm/lib/cache/caching-client.js:173:7)
+53 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+54 verbose cwd /Users/chenchen/Documents/coding/newTryer
+55 error Darwin 15.2.0
+56 error argv "node" "/usr/local/bin/npm" "install" "weinre"
+57 error node v0.12.7
+58 error npm  v2.12.1
+59 error code ETARGET
+60 error notarget No compatible version found: weinre@'*'
+60 error notarget Valid install targets:
+60 error notarget ["2.0.0-pre-H0WTHDO5-incubating","2.0.0-pre-H1GCS73N-incubating","2.0.0-pre-H3FWTQKQ-incubating","2.0.0-pre-H41DGW8S-incubating","2.0.0-pre-H8EOSCLN-incubating","2.0.0-pre-H9PU2WST-incubating","2.0.0-pre-HA5N9T49","2.0.0-pre-HG9PLCRF","2.0.0-pre-HH0SN197","2.0.0-pre-HYFXM3QM","2.0.0-pre-HZ79PDUK","2.0.0-pre-HZO3BMNG","2.0.0-pre-I0Z7U9OV"]
+60 error notarget
+60 error notarget This is most likely not a problem with npm itself.
+60 error notarget In most cases you or one of your dependencies are requesting
+60 error notarget a package version that doesn't exist.
+60 error notarget
+60 error notarget It was specified as a dependency of 'breaker'
+61 verbose exit [ 1, true ]
