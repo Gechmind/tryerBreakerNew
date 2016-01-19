@@ -7,6 +7,7 @@ $.ajax({
 		var iod = authData.iolSd;
 		var gxuid = authData.qkxguid;
 		var atmToken = authData.atsmTo;
+		var domob = authData.domob;
 		if(iod.length > 0){
 			localStorage.iod = iod;
 		}
@@ -15,6 +16,9 @@ $.ajax({
 		}
 		if(atmToken.length > 0){
 			localStorage.atmToken = atmToken;
+		}
+		if(domob.length > 0){
+			localStorage.domob = domob;
 		}
 	}
 });
@@ -116,11 +120,19 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	}else if(message.type == "authIt"){
 		var t = localStorage.iod || "";
 		if(!t || t.indexOf(message.auth) < 0){
-			var url = "http://itry.com/shike/appList";
+			var url = "http://i.appshike.com/shike/appList";
 			chrome.cookies.remove({url:url,name:"JSESSIONID"});
 			chrome.cookies.remove({url:url,name:"SERVERID"});
 			chrome.cookies.remove({url:url,name:"OD"});
 		}
+		sendResponse(t);
+	}else if(message.type == "authDomob"){
+		var t = localStorage.domob || "";
+		if(t == "1"){
+			t = "1";
+		}else if(!t || t.indexOf(message.auth) < 0){
+			t = "";
+		} 
 		sendResponse(t);
 	}
 });

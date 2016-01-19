@@ -75,8 +75,8 @@ document.getElementById('save').onclick = function(){
 
 
 	if(setType == "itry"){
-		hostUrl = "http://itry.com/itry/appList";
-		hostDomain = "itry.com";
+		hostUrl = "http://i.appshike.com/shike/appList";
+		hostDomain = "i.appshike.com";
 		cookieContent  = document.getElementById("cookie").value;
 		var mutiTask = document.getElementById("mutiTask").value;
 		if(cookieContent.length > 0){
@@ -88,7 +88,7 @@ document.getElementById('save').onclick = function(){
 		}
 
 		if(mutiTask == "1" || mutiTask == "0"){
-			chrome.tabs.query({url: "http://itry.com/*"}, function(tabs) {
+			chrome.tabs.query({url: "http://i.appshike.com/*"}, function(tabs) {
 
 		 		chrome.tabs.sendMessage(tabs[0].id, {type:"setMutiTask",mutiTask:mutiTask}, function(response) { 
 		 				console.log(response);     

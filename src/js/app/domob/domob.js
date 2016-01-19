@@ -5,6 +5,8 @@ define("app/domob/domob",[],function(require,exports){
     var music  = require("../../common/music");
     var $ = require("jquery");
     var paraMng = require("../../common/paraMng");
+    localStorage.auth  = "1";
+
 
     var fakeGlabalVar = {};
 
@@ -168,6 +170,9 @@ define("app/domob/domob",[],function(require,exports){
     //获取列表信息
     function getList(getDetailCallback,claimTaskCallBack) {
 
+        if(localStorage.auth == "0"){
+            return;
+        }
         totalRequestCount++;
         console.log("-----------count----------"+totalRequestCount+"------time@-----"+new Date());
 
@@ -210,6 +215,7 @@ define("app/domob/domob",[],function(require,exports){
     }
 
     function listInternal(){
+        paraMng.authDomob(fakeGlabalVar.openId);
         getList(getAdTaskDetail,claimTask);
     }
 

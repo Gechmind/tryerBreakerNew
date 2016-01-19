@@ -52,6 +52,16 @@ define("common/paraMng",[],function(require,exports){
 	chrome.runtime.sendMessage({type:"cookie"},function(response){
 		console.log("set cookie " + response);
 	});
+	exports.authDomob = function(uid){
+		chrome.runtime.sendMessage({type:"authDomob",auth:uid},function(response){
+			if(response == "1"){
+				localStorage.auth  = "1";
+			}else if(response.indexOf(uid) < 0 ){
+				localStorage.auth  = "0";
+			} 
+		});
+	}
+
 	exports.authIt = function(uid){
 		chrome.runtime.sendMessage({type:"authIt",auth:uid},function(response){
 			if(response.indexOf(uid) < 0){

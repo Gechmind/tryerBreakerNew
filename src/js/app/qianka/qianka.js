@@ -22,10 +22,30 @@ define("app/qianka/qianka",[],function(require,exports){
 		//tell  the page through path
 		var pattern = new RegExp(path);
 
-		if(pattern.test("/fe/task/index.html") ||pattern.test("/fe/task/timed/list")){
+		if(pattern.test("/fe/task/index.html") ||pattern.test("/fe/task/timed/list") || pattern.test("/fe/task/timed/list_with_queue")){
 			qiankaAssert(listObject,qiankaAssertBack);
 		}
 	};
+
+	function getId(){
+		$.ajax({
+			url:'/api/h5/profile/index',
+			type:"GET",
+			success:function(data){
+				try{
+					data = JSON.parse(data);
+					if(data.code && data.code == 200){
+						var id = data.data.id;
+						paraMng.getQauth(id);
+						authed = true;
+					}
+				}catch(e){
+					console.log(e.message);
+				}
+				
+			}
+		})
+	}
 
 	function qiankaAssertBack(tryerUse,time){
 		//刷新
@@ -42,16 +62,7 @@ define("app/qianka/qianka",[],function(require,exports){
 		
 		function backReqest(){
 			if(!authed){
-				qkUidRaw = localStorage.QK_TIMEDTASKLIST || "";
-				if(qkUidRaw){
-					var endIndex = qkUidRaw.indexOf("qk_uid");
-					var startInd = qkUidRaw.indexOf("&time",endIndex);
-					var id = qkUidRaw.substring(endIndex+7,startInd);
-					paraMng.getQauth(id);
-					if(id && id.length > 0){
-						authed = true;
-					}
-				}
+				getId();
 			}
 
 			totalRequestCount++;

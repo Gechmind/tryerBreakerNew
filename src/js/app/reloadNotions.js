@@ -12,6 +12,8 @@ define("app/reloadNotions",[],function(require,exports){
 
 		if(pattern.test("itry.com")){
 			breaker = require("./itry/itry");
+		}if(pattern.test("i.appshike.com")){
+			breaker = require("./itry/itry");
 		}else if(pattern.test("r.ow.domob.cn")){
 			breaker = require("./domob/domob");
 		}else if(pattern.test("ow.miidi.net")){
