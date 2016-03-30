@@ -2,7 +2,7 @@ module.exports = function(grunt){
 'use strict';
 	
 	var contentCtrl = {
-		path : ['atm','domob','itry','panda','qianka','miidi'],
+		path : ['atm','domob','itry','panda','qianka','miidi','lanmao'],
 		pathInclude :[],
 		itry:   ['\"js/app/itry/hack.js\",','\"js/app/itry/itry.js\",'],
         qianka: ['\"js/app/qianka/qianka.js\",'],
@@ -10,6 +10,7 @@ module.exports = function(grunt){
         atm   :['\"js/app/atm/atm.js\",'],
         panda :['\"js/app/panda/panda.js\",'],
         miidi :['\"js/app/miidi/miidi.js\",'],
+        lanmao :['\"js/app/lanmao/lanmao.js\",'],
         authcontent:{},
         personName:""
 	};
@@ -205,6 +206,9 @@ module.exports = function(grunt){
 		}
 		if(personDetail.domob.length > 0){
 			pdList.push("domob");
+		}
+		if(personDetail.lanmao.length > 0){
+			pdList.push("lanmao");
 		}
 		contentCtrl.personName = personDetail.nickname+"/breaker";
 		contentCtrl.authcontent = personDetail;

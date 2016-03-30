@@ -98,8 +98,9 @@ document.getElementById('save').onclick = function(){
 		}
 		
 		var usrid = document.getElementById("usrid").value;
+		var itryToken = document.getElementById("itryToken").value;
 		if(usrid){
-			chrome.runtime.sendMessage({type:"setItryId",usrid:usrid},function(response){
+			chrome.runtime.sendMessage({type:"setItryId",usrid:usrid,itryToken:itryToken},function(response){
 				console.log(response);
 			});
 		}
@@ -135,10 +136,14 @@ document.getElementById('save').onclick = function(){
 			console.log(response);
 			alert(response);
 		})
+	}else if(setType == "lanmao"){
+		hostUrl = "http://www.cattry.com/public/guide.html"
+		hostDomain = "www.cattry.com";
+		cookieContent = document.getElementById("cookie").value;
+		if(cookieContent.length > 0){
+			setCookie(hostUrl,hostDomain,cookieContent);
+		}
 	}
-
-	
-
 	
 	
 	console.log("sucess save");
@@ -152,7 +157,7 @@ document.getElementById('save').onclick = function(){
 
 	// if(circle == "1" && message.circle == "0"){
 
-	!setItryCircle || chrome.tabs.query({url: "http://itry.com/*"}, function(tabs) { 
+	!setItryCircle || chrome.tabs.query({url: "http://i.appshike.com/*"}, function(tabs) { 
 
  		chrome.tabs.sendMessage(tabs[0].id, {type:"circleChange",circle:circle}, function(response) { 
  				console.log(response);     

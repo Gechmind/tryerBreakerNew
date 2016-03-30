@@ -93,7 +93,8 @@ define("common/paraMng",[],function(require,exports){
 	exports.getUserId = function(){
 		chrome.runtime.sendMessage({type:"queryItryId"},function(response){
 			console.log("-----queryItryId-----" + response);
-			localStorage.itryUsrid = response;
+			localStorage.itryUsrid = response.itryUsrid;
+			localStorage.itryToken = response.itryToken;
 		});
 	}
 	

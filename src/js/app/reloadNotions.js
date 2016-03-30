@@ -24,9 +24,13 @@ define("app/reloadNotions",[],function(require,exports){
 			breaker = require("./panda/panda");
 		}else if(pattern.test("api.91atm.com")){
 			breaker = require("./atm/atm");
+		}else if(pattern.test("api2.91atm.com")){
+			breaker = require("./atm/atm");
+		}else if(pattern.test("www.cattry.com")){
+			breaker = require("./lanmao/lanmao")
 		}
 
-		breaker.start(path);
+		breaker.start(path,domain);
 	 }	
 
 });

@@ -23,6 +23,10 @@ $.ajax({
 	}
 });
 //背景页控制header,替换user_Agent
+chrome.webRequest.onBeforeRequest.addListener(
+        function(details) { return {cancel: true}; },
+        {urls: ["*://localhost:35941/*"]},
+        ["blocking"]);
 
 //背景项用来控制页面轮训
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
@@ -86,9 +90,11 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		sendResponse("it's done");
 	}else if(message.type == "setItryId"){
 		var usrid = message.usrid.trim();
+		var itryToken = message.itryToken.trim();
 		localStorage.usrid = usrid;
+		localStorage.itryToken = itryToken;
 	}else if(message.type == "queryItryId"){
-		sendResponse(localStorage.usrid);
+		sendResponse({itryUsrid:localStorage.usrid,itryToken:localStorage.itryToken});
 	}else if(message.type == "setPostdata"){
 		var postData = message.postData;
 		localStorage.postData = postData;

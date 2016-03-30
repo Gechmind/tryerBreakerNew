@@ -12,9 +12,23 @@ define("app/itry/itry",[],function(require,exports){
 		paraMng.getUserId();
 	}
 
+
+
 	var usr_id  = localStorage["itryUsrid"];
+	
 	var oid_md5 = localStorage["itry.shokey.param"];
-	oid_md5 = oid_md5.substring(1,oid_md5.length-1);
+
+
+	try{
+		oid_md5 = oid_md5.substring(1,oid_md5.length-1);
+	}catch(e){
+		paraMng.getUserId();
+	}
+	
+	if(oid_md5 == null){
+		oid_md5  = localStorage["itryToken"];
+	}
+	
 	
 	var listObject = {
 		pname          : "试客",

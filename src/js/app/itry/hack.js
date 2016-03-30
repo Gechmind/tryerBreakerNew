@@ -6,7 +6,7 @@ define("app/itry/hack",[],function(require,exports){
 	var  totalRequestCount = 0;
 	var hasTask = false;
 	var multiTask = "0";//多任务
-	var authed = false;
+	var authed = true;//authed = true
 
 
 	if(localStorage.multiTask == "1"){//开启多任务

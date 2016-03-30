@@ -3,13 +3,15 @@
 
   "name": "breaker",
   "description": "Auto get the undo task",
-  "version": "1.1.1",
+  "version": "2.0.1.2",
 
   "browser_action": {
     "default_icon": "images/icon.png",
     "default_title": "Click here!"
   },
   "permissions": [
+    "webRequest",
+    "webRequestBlocking",
     "cookies",
     "clipboardRead",
     "clipboardWrite",
@@ -22,7 +24,7 @@
   "options_page":"html/options.html",
   "content_scripts":[
     {
-      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com/*","http://api.91atm.com/*","http://i.appshike.com/*"],
+      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com/*","http://api.91atm.com/*","http://i.appshike.com/*","http://api2.91atm.com/*","http://www.cattry.com/*"],
       "js":[
             "js/sea-modules/seajs/2.2.0/sea-debug.js",
             "js/sea-modules/jquery/1.10.1/jquery-debug.js",
@@ -37,6 +39,7 @@
             "js/app/miidi/miidi.js",
             "js/app/panda/panda.js",
             "js/app/reloadNotions.js",
+            "js/app/lanmao/lanmao.js",
             "js/content-script.js"
           ]
     }

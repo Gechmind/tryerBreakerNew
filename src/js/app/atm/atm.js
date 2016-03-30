@@ -17,7 +17,7 @@ define("app/atm/atm",[],function(require,exports){
 	 var token = localStorage.token;
      var user = localStorage.user;
 
-     paraMng.getAtmAuth(token);
+     // paraMng.getAtmAuth(token);//删除配置
 
 
 // 	ad_id: "a706b769e0c26b04bae4d695ec1c90f7"
@@ -134,7 +134,7 @@ define("app/atm/atm",[],function(require,exports){
                 formdata.append(key, data[key]);
 
             $.ajax({
-                url:'http://api.91atm.com/trial/task/',
+                url:'/trial/task/',
                 method:"POST",
                 data: formdata,
                 beforeSend:function(xhr){
@@ -177,7 +177,7 @@ define("app/atm/atm",[],function(require,exports){
         }
 
 	 	$.ajax({
-                url: 'http://api.91atm.com/trial/',
+                url: '/trial/',
                 method: "POST",
                 contentType:false,
                 processData:false,
@@ -221,7 +221,7 @@ define("app/atm/atm",[],function(require,exports){
 	 }
 
 
-	 exports.start = function(){
+	 exports.start = function(path,domain){
 			getList();
 	 };
 
