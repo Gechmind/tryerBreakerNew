@@ -28,6 +28,8 @@ define("app/reloadNotions",[],function(require,exports){
 			breaker = require("./atm/atm");
 		}else if(pattern.test("www.cattry.com")){
 			breaker = require("./lanmao/lanmao")
+		}else if(pattern.test("www.xiaoyuzhuanqian.com")){
+			breaker = require("./xiaoyu/xiaoyu")
 		}
 
 		breaker.start(path,domain);

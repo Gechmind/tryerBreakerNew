@@ -143,6 +143,13 @@ document.getElementById('save').onclick = function(){
 		if(cookieContent.length > 0){
 			setCookie(hostUrl,hostDomain,cookieContent);
 		}
+	}else if(setType == "xiaoyu"){
+		hostUrl = "http://www.xiaoyuzhuanqian.com/index/"
+		hostDomain = "www.xiaoyuzhuanqian.com";
+		cookieContent = document.getElementById("cookie").value;
+		if(cookieContent.length > 0){
+			setCookie(hostUrl,hostDomain,cookieContent);
+		}
 	}
 	
 	
