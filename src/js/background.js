@@ -23,10 +23,10 @@ $.ajax({
 	}
 });
 //背景页控制header,替换user_Agent
-chrome.webRequest.onBeforeRequest.addListener(
-        function(details) { return {cancel: true}; },
-        {urls: ["*://localhost:35941/*"]},
-        ["blocking"]);
+// chrome.webRequest.onBeforeRequest.addListener(
+//         function(details) { return {cancel: true}; },
+//         {urls: ["*://localhost:35941/*"]},
+//         ["blocking"]);
 
 //背景项用来控制页面轮训
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
@@ -70,22 +70,20 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		var cookies = cookiesObj.split(";");
 		for(var i = 0 ;i < cookies.length;i++){
 			var cookiesPair = cookies[i].split("=");
+			if(cookiesPair.length > 2){
+				cookiesPair[1] = cookiesPair[1]+"="+cookiesPair[2]
+			}
 
 			chrome.cookies.remove({url:url,
 				name:cookiesPair[0].trim()
 			});
-			("JSESSIONID" == cookiesPair[0].trim() || "SERVERID" == cookiesPair[0].trim())? chrome.cookies.set({url:url,
-					name:cookiesPair[0].trim(),
-					domain:domain,
-					path:"/",
-					value:cookiesPair[1]
-			}):(chrome.cookies.set({url:url,
+			chrome.cookies.set({url:url,
 					name:cookiesPair[0].trim(),
 					domain:domain,
 					path:"/",
 					value:cookiesPair[1],
 					expirationDate:+exp
-			}));
+			});
 		}
 		sendResponse("it's done");
 	}else if(message.type == "setItryId"){

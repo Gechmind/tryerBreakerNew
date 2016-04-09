@@ -2,7 +2,7 @@ module.exports = function(grunt){
 'use strict';
 	
 	var contentCtrl = {
-		path : ['atm','domob','itry','panda','qianka','miidi','lanmao'],
+		path : ['atm','domob','itry','panda','qianka','miidi','lanmao','xiaoyu','iformoney'],
 		pathInclude :[],
 		itry:   ['\"js/app/itry/hack.js\",','\"js/app/itry/itry.js\",'],
         qianka: ['\"js/app/qianka/qianka.js\",'],
@@ -11,6 +11,8 @@ module.exports = function(grunt){
         panda :['\"js/app/panda/panda.js\",'],
         miidi :['\"js/app/miidi/miidi.js\",'],
         lanmao :['\"js/app/lanmao/lanmao.js\",'],
+        xiaoyu :['\"js/app/xiaoyu/xiaoyu.js\",'],
+        iformoney:['\"js/app/iformoney/iformoney.js\",'],
         authcontent:{},
         personName:""
 	};
@@ -209,6 +211,12 @@ module.exports = function(grunt){
 		}
 		if(personDetail.lanmao.length > 0){
 			pdList.push("lanmao");
+		}
+		if(personDetail.xiaoyu.length > 0){
+			pdList.push("xiaoyu");
+		}
+		if(personDetail.iformoney.length > 0){
+			pdList.push("iformoney");
 		}
 		contentCtrl.personName = personDetail.nickname+"/breaker";
 		contentCtrl.authcontent = personDetail;

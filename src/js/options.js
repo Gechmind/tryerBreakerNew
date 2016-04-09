@@ -150,6 +150,20 @@ document.getElementById('save').onclick = function(){
 		if(cookieContent.length > 0){
 			setCookie(hostUrl,hostDomain,cookieContent);
 		}
+	}else if(setType == "chuangqish"){
+		hostUrl = "http://www.chuangqish.com/LoveBar/home.jsp"
+		hostDomain = "www.chuangqish.com";
+		cookieContent = document.getElementById("cookie").value;
+		if(cookieContent.length > 0){
+			setCookie(hostUrl,hostDomain,cookieContent);
+		}
+	}else if(setType == "iformoney"){
+		hostUrl = "http://iformoney.com/weixinnew/rw.php"
+		hostDomain = "iformoney.com";
+		cookieContent = document.getElementById("cookie").value;
+		if(cookieContent.length > 0){
+			setCookie(hostUrl,hostDomain,cookieContent);
+		}
 	}
 	
 	

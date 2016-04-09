@@ -30,6 +30,10 @@ define("app/reloadNotions",[],function(require,exports){
 			breaker = require("./lanmao/lanmao")
 		}else if(pattern.test("www.xiaoyuzhuanqian.com")){
 			breaker = require("./xiaoyu/xiaoyu")
+		}else if(pattern.test("www.chuangqish.com/")){
+			breaker = require("./chuangqish/chuangqish")
+		}else if(pattern.test("iformoney.com/")){
+			breaker = require("./iformoney/iformoney")
 		}
 
 		breaker.start(path,domain);
