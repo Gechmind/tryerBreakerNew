@@ -3,7 +3,7 @@
 
   "name": "breaker",
   "description": "Auto get the undo task",
-  "version": "2.2.0",
+  "version": "2.3.0",
 
   "browser_action": {
     "default_icon": "images/icon.png",
@@ -24,7 +24,7 @@
   "options_page":"html/options.html",
   "content_scripts":[
     {
-      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com/*","http://api.91atm.com/*","http://i.appshike.com/*","http://api2.91atm.com/*","http://www.cattry.com/*","http://www.xiaoyuzhuanqian.com/*","http://www.chuangqish.com/*","http://iformoney.com/*"],
+      "matches":["http://itry.com/*","http://r.ow.domob.cn/wx/ui*","http://ow.miidi.net/ow*","http://localhost:18080/itry*","http://m.qianka.com/*","http://m.shiwan123.com/*","http://api.91atm.com/*","http://i.appshike.com/*","http://api2.91atm.com/*","http://www.cattry.com/*","http://www.xiaoyuzhuanqian.com/*","http://www.chuangqish.com/*","http://iformoney.com/*","https://try.taobao.com/*"],
       "js":[
             "js/sea-modules/seajs/2.2.0/sea-debug.js",
             "js/sea-modules/jquery/1.10.1/jquery-debug.js",
@@ -43,6 +43,7 @@
             "js/app/xiaoyu/xiaoyu.js",
             "js/app/chuangqish/chuangqish.js",
             "js/app/iformoney/iformoney.js",
+            "js/app/taobao/taobao.js",
             "js/content-script.js"
           ]
     }
